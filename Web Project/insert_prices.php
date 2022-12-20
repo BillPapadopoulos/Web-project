@@ -10,8 +10,8 @@ $array = json_decode($data,true);
 $inserted_rows=0;
 
 foreach($array as $value){
-  for($dates=0; $dates<=4; $dates++){
-        $query = "INSERT INTO price_variety (`product_id`,`price_date`,`price`) VALUES ('".$value['id']."','".$value['prices'][$dates]['date']."','".$value['prices'][$dates]['price']."')";
+  for($count=0; $count<=4; $count++){
+        $query = "INSERT INTO price_variety (`product_id`,`price_date`,`price`) VALUES ('".$value['id']."','".$value['prices'][$count]['date']."','".$value['prices'][$count]['price']."')";
         mysqli_query($con,$query);
         $inserted_rows++;  
   };  
