@@ -61,18 +61,10 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   document.querySelectorAll(".form__input").forEach(inputElement => {
-    inputElement.addEventListener("blur", e => {
-      if (e.target.id === "signupUsername" && e.target.value.length > 0 && e.target.value.length < 10) {
-        setInputError(inputElement, "Username must be at least 10 characters in length");
-      }
-    });
-  });
-
-  document.querySelectorAll(".form__input").forEach(inputElement => {
       inputElement.addEventListener("blur", e => {
         if (e.target.id === "signupPassword" && e.target.value.length > 0 && e.target.value.length < 8) {
           setInputError(inputElement, "Password must be at least 8 characters in length");
-        }  
+        }   
       });   
 
     inputElement.addEventListener("input", e => {
@@ -83,9 +75,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document.querySelectorAll(".form__input2").forEach(inputElement => {
     inputElement.addEventListener("blur", e => {
-      if (password.value != password2.value) {
+      if(password2.value.length == 0){
 
-        setMatchingError(inputElement, "Passwords must be the same");
+        setMatchingError(inputElement, "Please enter the password again");
+
+      }
+      else if (password.value != password2.value) {
+
+        setMatchingError(inputElement, "Passwords don't match");
         
         }  
       });
@@ -94,7 +91,58 @@ document.addEventListener("DOMContentLoaded", () => {
       clearMatchingError(inputElement);
       });
 
-    });
+  });
 
+  document.querySelectorAll(".form__input").forEach(inputElement => {
+      inputElement.addEventListener("blur", e => {
+        if (e.target.id === "signupPassword" && e.target.value.search(/[0-9]/) == -1) {
+          setInputError(inputElement, "Password must contain at least one number");
+        }   
+      }); 
+
+    inputElement.addEventListener("input", e => {
+        clearInputError(inputElement);
+      });
+
+  });
+
+  document.querySelectorAll(".form__input").forEach(inputElement => {
+    inputElement.addEventListener("blur", e => {
+      if (e.target.id === "signupPassword" && e.target.value.search(/[!\@\#\$\%\^\&\*\+\-\?\.\,\=\(\)\_]/) == -1) {
+        setInputError(inputElement, "Password must contain at least one special character");
+      }   
+    }); 
+
+    inputElement.addEventListener("input", e => {
+      clearInputError(inputElement);
+    });
+  
+  });
+
+  document.querySelectorAll(".form__input").forEach(inputElement => {
+      inputElement.addEventListener("blur", e => {
+        if (e.target.id === "signupPassword" && e.target.value.search(/[A-Z]/) == -1) {
+          setInputError(inputElement, "Password must contain at least one upper case letter");
+        }   
+      }); 
+
+    inputElement.addEventListener("input", e => {
+        clearInputError(inputElement);
+      });
+    
+  });
+
+  document.querySelectorAll(".form__input").forEach(inputElement => {
+    inputElement.addEventListener("blur", e => {
+      if (e.target.id === "signupPassword" && e.target.value.length == 0) {
+        setInputError(inputElement, "Please enter the password");
+      }   
+    }); 
+
+    inputElement.addEventListener("input", e => {
+      clearInputError(inputElement);
+    });
+  
+});
 
 });
