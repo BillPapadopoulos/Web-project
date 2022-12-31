@@ -29,6 +29,7 @@ body {
 
 .container,
 .form__input,
+.form__input2,
 .form__button{
   font: 500 1rem 'Quicksand', sans-serif;
 }
@@ -86,12 +87,35 @@ color:var(--color-success);
   background: #ffffff;
 }
 
+.form__input2{
+  display: block;
+  width:100%;
+  padding: 0.75rem;
+  box-sizing: border-box;
+  border-radius: var(--border-radius);
+  border: 1px solid #dddddd;
+  outline: none;
+  background: #eeeeee;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.form__input2:focus{
+  border-color: var(--color-primary);
+  background: #ffffff;
+}
+
 .form__input--error{
-color: var(--color-error)
+color: var(--color-error);
 border-color:var(var(--color-error));
 }
 
 .form__input-error-message{
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--color-error);
+}
+
+.form__input-error-message2{
   margin-top: 0.5rem;
   font-size: 0.85rem;
   color: var(--color-error);
@@ -131,4 +155,5 @@ border-color:var(var(--color-error));
 .form__link:hover{
   text-decoration: underline;
 }
+
 
