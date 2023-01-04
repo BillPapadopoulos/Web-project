@@ -52,14 +52,6 @@ document.addEventListener("DOMContentLoaded", () => {
     setFormMessage(loginForm, "error", "Invalid username/password combination");
   });
 
-  createAccountForm.addEventListener("submit",e => {
-    e.preventDefault();
-
-    //AJAX OR NODE CONNECTION 
-
-    setFormMessage(createAccountForm, "error", "Cannot leave blanks");
-  });
-
   document.querySelectorAll(".form__input").forEach(inputElement => {
       inputElement.addEventListener("blur", e => {
         if (e.target.id === "signupPassword" && e.target.value.length > 0 && e.target.value.length < 8) {
