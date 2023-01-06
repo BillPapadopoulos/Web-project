@@ -12,15 +12,21 @@ if(isset($_POST['register'])) {
 
         $duplicate=mysqli_query($conn,"SELECT * FROM user WHERE user_username = '$username' OR email = '$emailAddress'");
         if (mysqli_num_rows($duplicate)>0){
+
+           
             
-            echo'<script> alert("Username or Email already exists.")</script>';
+            echo'<script>
+            
+            alert("Username or Email already exists.")
+            
+            </script>';
 
         }
         else{
             $query = "INSERT INTO user (`user_username`, `email`, `password`) VALUES ('$username', '$emailAddress', '$password')";
             $result = mysqli_query($conn,$query);    
             if($result){
-                echo'<script> alert("Successful registration...")</script>';
+                echo'<script> alert("Successful registration...") </script>';
             }
             else{
                 echo'<script>alert("Unsuccessful registration...")</script>';
@@ -31,4 +37,3 @@ if(isset($_POST['register'])) {
 }
 
 ?>
-
