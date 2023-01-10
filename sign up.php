@@ -1,0 +1,54 @@
+<?php
+
+$conn = mysqli_connect('localhost','root','', 'test');
+
+if(isset($_POST['register'])) {
+
+    $username = $_POST['signupUsername'];
+    $emailAddress = $_POST['email'];
+    $password =  $_POST['signupPassword'];
+
+ //Database connection
+
+        $duplicate_name=mysqli_query($conn,"SELECT * FROM user WHERE user_username = '$username'");
+        $duplicate_email=mysqli_query($conn,"SELECT * FROM user WHERE email = '$emailAddress'");
+
+      
+        if (mysqli_num_rows($duplicate_name)>0){
+
+           
+            
+            echo'<script>
+            
+            alert("This username already exists. Please go back to insert a valid one.");
+            window.location.href="Login-Sign up Form.php";
+            
+            </script>';
+            
+
+        }
+        else if (mysqli_num_rows($duplicate_email)>0){
+
+            echo'<script>
+            
+            alert("This email already exists. Please go back to insert a valid one.");
+            window.location.href="Login-Sign up Form.php";
+            </script>';
+       
+        
+        }
+        else{
+            $query = "INSERT INTO user (`user_username`, `email`, `password`) VALUES ('$username', '$emailAddress', '$password')";
+            $result = mysqli_query($conn,$query);    
+            if($result){
+                echo'<script> alert("Successful registration!") </script>';
+            }
+            else{
+                echo'<script>alert("Unsuccessful registration...")</script>';
+            }
+
+        }
+
+}
+
+?>
