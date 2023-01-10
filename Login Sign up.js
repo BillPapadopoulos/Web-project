@@ -29,6 +29,8 @@ function clearMatchingError(inputElement) {
 document.addEventListener("DOMContentLoaded", () => {
   const loginForm = document.querySelector("#login");
   const createAccountForm = document.querySelector("#createAccount");
+  const username = document.getElementById("signupUsername");
+  const email = document.getElementById("email");
   const password = document.getElementById("signupPassword");
   const password2= document.getElementById("signupPassword2");
 
@@ -44,13 +46,55 @@ document.addEventListener("DOMContentLoaded", () => {
     createAccountForm.classList.add("form--hidden");
   });
 
-  loginForm.addEventListener("submit", e => {
+  /*loginForm.addEventListener("submit", e => {
     e.preventDefault();
 
     //AJAX OR NODE CONNECTION
 
     setFormMessage(loginForm, "error", "Invalid username/password combination");
-  });
+  });*/
+
+  createAccountForm.addEventListener("submit", e=> {
+    
+   
+   
+   if(username.value.trim()!='' && email.value.trim()!='' && password.value.trim()!='' && password2.value.trim()!='' ){
+ 
+    validateForm();
+     }
+    else{
+      e.preventDefault();
+      validateForm();
+    
+    } 
+    
+    
+  
+  }); 
+
+  function validateForm(){
+    
+    if(username.value.trim()==''){
+      setError(username,'Name cannot be empty');
+    }
+    if(username.value.trim()==''){
+      setError(email,'Email cannot be empty');
+    }
+   if(username.value.trim()==''){
+      setError(password,'Password cannot be empty');
+    }
+    if(username.value.trim()==''){
+      setError(password2,'Confirmation password cannot be empty');
+    }
+  } 
+
+  function setError(element, errorMessage){
+    const parent = element.parentElement;
+    parent.classList.add('error');
+    const paragraph = parent.querySelector('p');
+    paragraph.textContent = errorMessage;
+  }
+  
 
   document.querySelectorAll(".form__input").forEach(inputElement => {
       inputElement.addEventListener("blur", e => {
