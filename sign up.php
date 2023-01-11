@@ -20,7 +20,7 @@ if(isset($_POST['register'])) {
             
             echo'<script>
             
-            alert("This username already exists. Please go back to insert a valid one.");
+            alert("This username already exists!");
             window.location.href="Login-Sign up Form.php";
             
             </script>';
@@ -31,7 +31,7 @@ if(isset($_POST['register'])) {
 
             echo'<script>
             
-            alert("This email already exists. Please go back to insert a valid one.");
+            alert("This email already exists!");
             window.location.href="Login-Sign up Form.php";
             </script>';
        

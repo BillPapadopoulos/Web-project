@@ -28,13 +28,9 @@ if(isset($_POST['login'])) {
     // header for map
   }
   else if(mysqli_num_rows($result)==0){
-    $name_error = "Sorry...Username does not exist";
-
-    
-
-
-  
+    $name_error = "Invalid combination of username/password";
   }
+  
 
 
 }

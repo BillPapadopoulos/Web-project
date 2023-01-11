@@ -1,3 +1,4 @@
+<?php include('login.php') ?>
 <!DOCTYPE html>
 <html>
 
@@ -11,7 +12,7 @@
   <body>
 
     <div class="container">
-      <form class="form" action="login.php" method="post" id="login">
+      <form class="form" action="Login-Sign up Form.php" method="post" id="login">
         <h1 class="form__title">Login</h1>
         <div
         <?php if (isset($name_error)): ?>

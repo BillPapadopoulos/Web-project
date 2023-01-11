@@ -31,6 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const createAccountForm = document.querySelector("#createAccount");
   const username = document.getElementById("signupUsername");
   const email = document.getElementById("email");
+  // const validEmail =/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
   const password = document.getElementById("signupPassword");
   const password2= document.getElementById("signupPassword2");
 
@@ -94,8 +95,24 @@ document.addEventListener("DOMContentLoaded", () => {
     const paragraph = parent.querySelector('p');
     paragraph.textContent = errorMessage;
   }
-  
 
+  
+  function isEmailValid(email){
+    const reg =/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+
+    return reg.test(email);
+  }
+  
+  document.querySelectorAll(".form__input").forEach(inputElement => {
+    inputElement.addEventListener("blur", e => {
+      if (isEmailValid(email)) {
+        setInputError(inputElement, "Email address is not valid");
+      }
+    });
+ });
+
+ 
+  
   document.querySelectorAll(".form__input").forEach(inputElement => {
       inputElement.addEventListener("blur", e => {
         if (e.target.id === "signupPassword" && e.target.value.length > 0 && e.target.value.length < 8) {
