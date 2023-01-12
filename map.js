@@ -1,4 +1,5 @@
-//sample data values for populate map
+//sample data values to populate map
+//data of the shops is put in the dara array
 let data = {
   "type": "FeatureCollection",
   "generator": "overpass-ide",
@@ -1570,26 +1571,28 @@ let data = {
     }
   ]
 };
-
+//map creation with openstreetmaps
 let mymap = L.map('mapid'); 
 
   L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(mymap);
 
+//this is the initial position when the app opens
+
 mymap.setView([38.2462420, 21.7350847], 16);
-
+//this is marker for the initial position
 let marker = L.marker ([38.246242, 21.7350847]);
-marker.addTo(mymap);
+marker.addTo(mymap); 
 marker.bindPopup("<b>Πλατεία Γεωργίου</b>");
-
+//this function chooses the name field and the coordinates for each shop from the data array. it also makes a marker for each shop
 var featuresLayer = new L.GeoJSON(data, {
   onEachFeature: function (feature, marker) {
     marker.bindPopup("<h4>" + feature.properties.name + "<h5>" + feature.geometry.coordinates + "</h4>");
   }
 });
 featuresLayer.addTo(mymap); 
-
+//this is the search bar for the map
 let controlSearch = new L.Control.Search({
   position: "topright",
   layer: featuresLayer,
@@ -1598,7 +1601,7 @@ let controlSearch = new L.Control.Search({
   zoom: 30,
   marker: false
 });
-
+//when the search is successful, the map coordinates you to the shop, then a pop up appears with basic shop info
 controlSearch.on('search:locationfound', function(e) {
 
   e.layer.openPopup().openOn(mymap);
