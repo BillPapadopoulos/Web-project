@@ -1,19 +1,19 @@
 <?php
-
+//Database connection
 $conn = mysqli_connect('localhost','root','', 'test');
-
+//register is the button from the html file
 if(isset($_POST['register'])) {
-
+    //get the html id's with method [post]
     $username = $_POST['signupUsername'];
     $emailAddress = $_POST['email'];
     $password =  $_POST['signupPassword'];
 
- //Database connection
-
+ 
+        //duplicate entries from database
         $duplicate_name=mysqli_query($conn,"SELECT * FROM user WHERE user_username = '$username'");
         $duplicate_email=mysqli_query($conn,"SELECT * FROM user WHERE email = '$emailAddress'");
 
-      
+        // if statement checks if the email or username is already in the database, or else it makes a new register (new user)
         if (mysqli_num_rows($duplicate_name)>0){
 
            
