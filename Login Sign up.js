@@ -33,11 +33,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const email = document.getElementById("email");
   const password = document.getElementById("signupPassword");
   const password2= document.getElementById("signupPassword2");
-  const validationLength=1;
-  const validationMatch=1;
-  const validationNumber=1;
-  const validationSymbol=1;
-  const validationCapital=1;
 
   document.querySelector("#linkCreateAccount").addEventListener("click", e => {
     e.preventDefault();
@@ -53,29 +48,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /*loginForm.addEventListener("submit", e => {
     e.preventDefault();
-
     //AJAX OR NODE CONNECTION
-
     setFormMessage(loginForm, "error", "Invalid username/password combination");
   });*/
-
-  createAccountForm.addEventListener("submit", e => {
-
-    if(validationLength==0 && validationCapital==0 && validationMatch==0 && validationNumber==0 && validationSymbol==0){
-      e.preventDefault();
-    
-    
-      alert("PEOS");
-    }
-    
-    
-  });
   
   document.querySelectorAll(".form__input").forEach(inputElement => {
       inputElement.addEventListener("blur", e => {
         if (e.target.id === "signupPassword" && e.target.value.length > 0 && e.target.value.length < 8) {
           setInputError(inputElement, "Password must be at least 8 characters in length");
-          validationLength=0;
         }   
       });   
 
@@ -88,21 +68,18 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll(".form__input2").forEach(inputElement => {
     inputElement.addEventListener("blur", e => {
       if(password2.value.length == 0){
-
         setMatchingError(inputElement, "Please enter the password again");
-
       }
       else if (password.value != password2.value) {
-
         setMatchingError(inputElement, "Passwords don't match");
-        validationMatch=0;
-        
-        }  
-      });
+        //document.getElementById("button").disabled = false;
+        //need to fix error with successful submit 
+      }  
+    });
 
     inputElement.addEventListener("input", e => {
       clearMatchingError(inputElement);
-      });
+    });
 
   });
 
@@ -110,7 +87,6 @@ document.addEventListener("DOMContentLoaded", () => {
       inputElement.addEventListener("blur", e => {
         if (e.target.id === "signupPassword" && e.target.value.search(/[0-9]/) == -1) {
           setInputError(inputElement, "Password must contain at least one number");
-          validationNumber=0;
         }   
       }); 
 
@@ -124,7 +100,6 @@ document.addEventListener("DOMContentLoaded", () => {
     inputElement.addEventListener("blur", e => {
       if (e.target.id === "signupPassword" && e.target.value.search(/[!\@\#\$\%\^\&\*\+\-\?\.\,\=\(\)\_]/) == -1) {
         setInputError(inputElement, "Password must contain at least one special character");
-        validationSymbol=0;
       }   
     }); 
 
@@ -138,7 +113,6 @@ document.addEventListener("DOMContentLoaded", () => {
       inputElement.addEventListener("blur", e => {
         if (e.target.id === "signupPassword" && e.target.value.search(/[A-Z]/) == -1) {
           setInputError(inputElement, "Password must contain at least one upper case letter");
-          validationCapital=0;
         }   
       }); 
 
@@ -148,6 +122,16 @@ document.addEventListener("DOMContentLoaded", () => {
     
   });
 
+  document.querySelectorAll(".form__input").forEach(inputElement => {
+    inputElement.addEventListener("blur", e => {
+      if(e.target.id === "signupPassword" && e.target.value.length == 0){
+        setInputError(inputElement, "Please enter the password");
+      }
+    });
+    inputElement.addEventListener("input", e => {
+      clearInputError(inputElement);
+    });
+  });
 
 
 });
