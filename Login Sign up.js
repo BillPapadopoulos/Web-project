@@ -31,9 +31,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const createAccountForm = document.querySelector("#createAccount");
   const username = document.getElementById("signupUsername");
   const email = document.getElementById("email");
-  // const validEmail =/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
   const password = document.getElementById("signupPassword");
   const password2= document.getElementById("signupPassword2");
+  const validationLength=1;
+  const validationMatch=1;
+  const validationNumber=1;
+  const validationSymbol=1;
+  const validationCapital=1;
 
   document.querySelector("#linkCreateAccount").addEventListener("click", e => {
     e.preventDefault();
@@ -55,68 +59,23 @@ document.addEventListener("DOMContentLoaded", () => {
     setFormMessage(loginForm, "error", "Invalid username/password combination");
   });*/
 
-  createAccountForm.addEventListener("submit", e=> {
-    
-   
-   
-   if(username.value.trim()!='' && email.value.trim()!='' && password.value.trim()!='' && password2.value.trim()!='' ){
- 
-    validateForm();
-     }
-    else{
+  createAccountForm.addEventListener("submit", e => {
+
+    if(validationLength==0 && validationCapital==0 && validationMatch==0 && validationNumber==0 && validationSymbol==0){
       e.preventDefault();
-      validateForm();
-    
-    } 
     
     
-  
-  }); 
-
-  function validateForm(){
+      alert("PEOS");
+    }
     
-    if(username.value.trim()==''){
-      setError(username,'Name cannot be empty');
-    }
-    if(username.value.trim()==''){
-      setError(email,'Email cannot be empty');
-    }
-   if(username.value.trim()==''){
-      setError(password,'Password cannot be empty');
-    }
-    if(username.value.trim()==''){
-      setError(password2,'Confirmation password cannot be empty');
-    }
-  } 
-
-  function setError(element, errorMessage){
-    const parent = element.parentElement;
-    parent.classList.add('error');
-    const paragraph = parent.querySelector('p');
-    paragraph.textContent = errorMessage;
-  }
-
-  
-  function isEmailValid(email){
-    const reg =/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-
-    return reg.test(email);
-  }
-  
-  document.querySelectorAll(".form__input").forEach(inputElement => {
-    inputElement.addEventListener("blur", e => {
-      if (isEmailValid(email)) {
-        setInputError(inputElement, "Email address is not valid");
-      }
-    });
- });
-
- 
+    
+  });
   
   document.querySelectorAll(".form__input").forEach(inputElement => {
       inputElement.addEventListener("blur", e => {
         if (e.target.id === "signupPassword" && e.target.value.length > 0 && e.target.value.length < 8) {
           setInputError(inputElement, "Password must be at least 8 characters in length");
+          validationLength=0;
         }   
       });   
 
@@ -136,6 +95,7 @@ document.addEventListener("DOMContentLoaded", () => {
       else if (password.value != password2.value) {
 
         setMatchingError(inputElement, "Passwords don't match");
+        validationMatch=0;
         
         }  
       });
@@ -150,6 +110,7 @@ document.addEventListener("DOMContentLoaded", () => {
       inputElement.addEventListener("blur", e => {
         if (e.target.id === "signupPassword" && e.target.value.search(/[0-9]/) == -1) {
           setInputError(inputElement, "Password must contain at least one number");
+          validationNumber=0;
         }   
       }); 
 
@@ -163,6 +124,7 @@ document.addEventListener("DOMContentLoaded", () => {
     inputElement.addEventListener("blur", e => {
       if (e.target.id === "signupPassword" && e.target.value.search(/[!\@\#\$\%\^\&\*\+\-\?\.\,\=\(\)\_]/) == -1) {
         setInputError(inputElement, "Password must contain at least one special character");
+        validationSymbol=0;
       }   
     }); 
 
@@ -176,6 +138,7 @@ document.addEventListener("DOMContentLoaded", () => {
       inputElement.addEventListener("blur", e => {
         if (e.target.id === "signupPassword" && e.target.value.search(/[A-Z]/) == -1) {
           setInputError(inputElement, "Password must contain at least one upper case letter");
+          validationCapital=0;
         }   
       }); 
 
@@ -185,17 +148,6 @@ document.addEventListener("DOMContentLoaded", () => {
     
   });
 
-  document.querySelectorAll(".form__input").forEach(inputElement => {
-    inputElement.addEventListener("blur", e => {
-      if (e.target.id === "signupPassword" && e.target.value.length == 0) {
-        setInputError(inputElement, "Please enter the password");
-      }   
-    }); 
 
-    inputElement.addEventListener("input", e => {
-      clearInputError(inputElement);
-    });
-  
-});
 
 });

@@ -46,22 +46,22 @@
         <div class="form__message form__message--error"></div>
         <div class="error-text"></div>
         <div class="form__input-group">
-          <input type="text" id="signupUsername" class="form__input" autofocus placeholder="Username" name="signupUsername">
+          <input type="text" required id="signupUsername" class="form__input" autofocus placeholder="Username" name="signupUsername">
           <div class="form__input-error-message"></div>
           <p>Error message</p>
         </div>
         <div class="form__input-group">
-          <input type="text" id="email" class="form__input" autofocus placeholder="Email Address" name="email"> 
+          <input type="text" pattern="^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$" required id="email" class="form__input" autofocus placeholder="Email Address" name="email"> 
+          <div class="form__input-error-message"></div>
+          <p>Error message</p>
+        </div> 
+        <div class="form__input-group">
+          <input type="password" required id="signupPassword" class="form__input" autofocus placeholder="Password" name="signupPassword">
           <div class="form__input-error-message"></div>
           <p>Error message</p>
         </div>
         <div class="form__input-group">
-          <input type="password" id="signupPassword" class="form__input" autofocus placeholder="Password" name="signupPassword">
-          <div class="form__input-error-message"></div>
-          <p>Error message</p>
-        </div>
-        <div class="form__input-group">
-          <input type="password" id="signupPassword2" class="form__input2" autofocus placeholder="Confirm password">
+          <input type="password" required id="signupPassword2" class="form__input2" autofocus placeholder="Confirm password">
           <div class="form__input-error-message2"></div>
           <p>Error message</p>
         </div>
