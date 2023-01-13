@@ -1,1 +1,54 @@
 #mapid { height: 700px; }
+
+*
+{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.body{
+
+  font-family:sans-serif;
+
+
+
+
+
+}
+
+.menu-bar{
+
+  background-color: #5db5a5;
+  text-align: center;
+
+
+}
+
+.menu-bar ul{
+  display: inline-flex;
+  list-style: none;
+  color: rgb(255, 254, 254);
+  font-size: large;
+}
+
+.menu-bar ul li{
+  width:120px;
+  margin:15px;
+  padding:15px;
+}
+
+.menu-bar ul li:hover{
+  
+  background: #3e9c8b;
+  border-radius: 3px;
+
+
+}
+
+.user{
+
+  text-align:center;
+  position:relative; left:390px; 
+
+}
