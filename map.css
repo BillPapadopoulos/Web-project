@@ -11,25 +11,21 @@
 
   font-family:sans-serif;
 
-
-
-
-
 }
 
 .menu-bar{
-
-  background-color: #5db5a5;
-  text-align: center;
-
-
+    background-color: #5db5a5;
+    text-align: center;
+   /* Optional set the opacity for a slightly transparent menu*/
+    
 }
 
 .menu-bar ul{
-  display: inline-flex;
-  list-style: none;
-  color: rgb(255, 254, 254);
-  font-size: large;
+    display: inline-flex;
+    list-style: none;
+    color: rgb(255, 254, 254);
+    font-size: large;
+    position:relative; left:100px; 
 }
 
 .menu-bar ul li{
@@ -49,6 +45,6 @@
 .user{
 
   text-align:center;
-  position:relative; left:390px; 
+  position:relative; left:270px; 
 
 }
