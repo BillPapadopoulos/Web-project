@@ -1,7 +1,7 @@
 <?php
 
 //Database connection
-$conn = mysqli_connect('localhost','root','', 'test');
+$conn = mysqli_connect('localhost','root','', 'web_database');
 
 if(isset($_POST['login'])) {
 
@@ -22,9 +22,13 @@ if(isset($_POST['login'])) {
 
   if (mysqli_num_rows($result)){
 
-   echo'<script> alert("Welcome back!") </script>';
+  //redirection to map file after the login
 
-    // header for map
+   echo'<script> 
+   alert("Welcome back!");
+   window.location.assign("map.php");
+   </script>';
+   
 
   }
   else if(mysqli_num_rows($result)==0){
