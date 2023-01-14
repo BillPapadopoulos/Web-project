@@ -1,6 +1,6 @@
 <?php
 //Database connection
-$conn = mysqli_connect('localhost','root','', 'test');
+$conn = mysqli_connect('localhost','root','', 'web_database');
 //register is the button from the html file
 if(isset($_POST['register'])) {
     //get the html id's with method [post]
@@ -41,9 +41,13 @@ if(isset($_POST['register'])) {
             $query = "INSERT INTO user (`user_username`, `email`, `password`) VALUES ('$username', '$emailAddress', '$password')";
             $result = mysqli_query($conn,$query);    
             if($result){
-                echo'<script> alert("Successful registration!") </script>';
+                echo'<script> 
+                window.location.assign("map.php");
+                alert("Successful registration!");
+                 </script>';
             }
             else{
+                // preventive error(it never appears)
                 echo'<script>alert("Unsuccessful registration...")</script>';
             }
 
