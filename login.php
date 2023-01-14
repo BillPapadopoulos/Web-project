@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 //Database connection
 $conn = mysqli_connect('localhost','root','', 'web_database');
 
@@ -23,7 +23,7 @@ if(isset($_POST['login'])) {
   if (mysqli_num_rows($result)){
 
   //redirection to map file after the login
-
+   $_SESSION['user_name'] = $username;
    echo'<script> 
    alert("Welcome back!");
    window.location.assign("map.php");

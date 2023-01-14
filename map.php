@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,23 +17,20 @@ src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-search/3.0.2/leaflet-search.min.js"></script>
 </head>
 <body>
-  
+
+
   
   <div class="menu-bar">
-    <ul>
-      <li><a href=#></a>Home</li>
-      <li><a href=#></a>Settings</li>
-      <li><a href=#></a>Contact</li>
-      <li><a href=#></a>Profile</li>
+   <ul class="Starter Buttons">
+     <li><a href=#></a>Home</li>
+     <li><a href=#></a>Settings</li>
+     <li><a href=#></a>Contact</li>
+     <li><a href=#></a>About us</li>
+     <li class="user">User : <?php echo $_SESSION['user_name']; ?></li>
     </ul>
-    <ul>
-      <li class="user">User</li>
-   </ul>  
   </div>
-
-    <div id="mapid"></div>
-    <script src="map.js"></script>
+  <div id="mapid"></div>
+  <script src="map.js"></script>
 
 </body>
 </html>
-

@@ -1,4 +1,3 @@
-
 <?php 
 //inserts the shops from the json file
 $con = mysqli_connect('localhost','root','', 'web_database');

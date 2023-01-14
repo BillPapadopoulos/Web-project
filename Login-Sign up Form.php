@@ -1,6 +1,6 @@
 <?php 
 //we include the login php file 
-include('login.php');
+include('login.php') 
 ?>
 <!DOCTYPE html>
 <html>
@@ -20,8 +20,8 @@ include('login.php');
         <div
         <?php if (isset($name_error)): 
         /*this class appears only when there is invalid username/password combination
-          here the message gets styled by css  */
-        ?>
+          here the message gets styled by css  
+        */?>
           class="form__message form__message--error"
         <?php endif ?>  
         >

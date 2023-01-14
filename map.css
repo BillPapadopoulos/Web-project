@@ -21,30 +21,37 @@
 }
 
 .menu-bar ul{
+    font-weight: 700;
     display: inline-flex;
     list-style: none;
-    color: rgb(255, 254, 254);
+    color: white;
     font-size: large;
     position:relative; left:100px; 
 }
 
 .menu-bar ul li{
-  width:120px;
+  width:150px;
   margin:15px;
   padding:15px;
+
 }
 
 .menu-bar ul li:hover{
   
   background: #3e9c8b;
   border-radius: 3px;
-
-
+  
 }
 
 .user{
-
+  margin:40px;
+  padding-right:40px;
+  font-size:large; 
+  overflow: visible;
+  white-space: nowrap;
+  color: white;
+  padding-left:1000px;
   text-align:center;
-  position:relative; left:270px; 
+  position:relative; left:160px; 
 
 }

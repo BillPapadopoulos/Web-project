@@ -1,4 +1,5 @@
 <?php
+session_start();
 //Database connection
 $conn = mysqli_connect('localhost','root','', 'web_database');
 //register is the button from the html file
@@ -41,6 +42,7 @@ if(isset($_POST['register'])) {
             $query = "INSERT INTO user (`user_username`, `email`, `password`) VALUES ('$username', '$emailAddress', '$password')";
             $result = mysqli_query($conn,$query);    
             if($result){
+                $_SESSION['user_name'] = $username;
                 echo'<script> 
                 window.location.assign("map.php");
                 alert("Successful registration!");
