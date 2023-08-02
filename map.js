@@ -1574,22 +1574,35 @@ let data = {
 //map creation with openstreetmaps
 
 var mapOptions = {
-  zoomControl: false
-}
+  zoom: 40,
+  center: L.latLng([21.7380288,38.24957])
+} //set center for initial map
 let mymap = L.map('mapid',mapOptions); 
 
-  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-}).addTo(mymap);
+mymap.addLayer(L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png'));
+
 
 //this is the initial position when the app opens
 
-mymap.setView([38.2462420, 21.7350847], 16);
-//this is marker for the initial position
+mymap.locate({setView: true, zoom: 30}); 
+  
+    function onLocationFound(e) {            
+      var radius = e.accuracy;             
+      var redIcon = L.icon({
+        iconUrl: './red_marker/red_marker.png',
+        iconSize: [25, 41], // size of the icon
+        iconAnchor: [12, 41], // point of the icon which will correspond to marker's location
+        popupAnchor: [1, -34] // point from which the popup should open relative to the iconAnchor
+      });
 
-let marker = L.marker ([38.246242, 21.7350847]);
-marker.addTo(mymap); 
-marker.bindPopup("<b>Πλατεία Γεωργίου</b>");
+      L.marker(e.latlng,{icon: redIcon}).addTo(mymap)
+      .bindPopup("You are within " + radius + " meters from this location.").openPopup();
+
+      L.circle(e.latlng, radius).addTo(mymap);
+    }
+  
+    mymap.on('locationfound', onLocationFound);
+
 //this function chooses the name field and the coordinates for each shop from the data array. it also makes a marker for each shop
 
 var featuresLayer = new L.GeoJSON(data, {
