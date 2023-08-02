@@ -21,8 +21,8 @@ src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js">
 
   <div class="menu-bar">
    <ul class="Starter Buttons">
-     <li><a href="map.php">Home</a></li>
-     <li><a href=#>Search Offer by Category</a></li>
+     <li class="home"><a href="map.php">Home</a></li>
+     <li class="pressed"><a href=#>Search Offer by Category</a></li>
      <li><a href=#>Report an Offer</a></li>
      <li><a href=#>Available Offers</a></li>
      <li><a href="settings.php">User : <?php echo $_SESSION['user_name']; ?> <br>Settings</a></li>

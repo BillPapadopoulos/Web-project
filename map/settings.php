@@ -1,7 +1,7 @@
 <?php
-session_start();
+//establish connection with database
+    $conn = mysqli_connect('localhost','root','', 'web_database');
 ?>
-
 <!DOCTYPE html>
 <html>
   <title>e-katanalotis offers</title>
@@ -21,15 +21,28 @@ src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js">
 
   <div class="menu-bar">
    <ul class="Starter Buttons">
-     <li><a href="map.php">Home</a></li>
+     <li class="home"><a href="map.php">Home</a></li>
      <li><a href=#>Search Offer by Category</a></li>
      <li><a href=#>Report an Offer</a></li>
      <li><a href=#>Available Offers</a></li>
-     <li><a href="settings.php">User : <?php echo $_SESSION['user_name']; ?> <br>Settings</a></li>
+     <li class="pressed"><a href="settings.php">User : <?php echo $_SESSION['user_name']; ?> <br>Settings</a></li>
     </ul>
   </div>
   <div id="mapid"></div>
   <script src="map.js"></script>
+  <div class="profile-settings">
+    <?php
+    
+    session_start();
+    //credentials of the logged in user
+    $username= $_POST['user_name'];
+    $password= $_POST['pass_word'];
+
+
+    mysqli_close($conn);
+    ?>
+  </div>
 
 </body>
 </html>
+
