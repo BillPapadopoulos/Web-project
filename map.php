@@ -22,11 +22,11 @@ src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js">
   
   <div class="menu-bar">
    <ul class="Starter Buttons">
-     <li><a href=#></a>Home</li>
-     <li><a href=#></a>Settings</li>
-     <li><a href=#></a>Contact</li>
-     <li><a href=#></a>About us</li>
-     <li class="user">User : <?php echo $_SESSION['user_name']; ?></li>
+     <li class="home"><a href=#></a>Home</li>
+     <li><a href=#></a>Search Offer by Category</li>
+     <li><a href=#></a>Report an Offer</li>
+     <li><a href=#></a>Available Offers</li>
+     <li class="user"><a href=#></a>User : <?php echo $_SESSION['user_name']; ?> <br>Settings</li>
     </ul>
   </div>
   <div id="mapid"></div>
