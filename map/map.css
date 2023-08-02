@@ -1,0 +1,83 @@
+#mapid { height: 700px; }
+
+*
+{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.body{
+
+  font-family:sans-serif;
+
+}
+
+.menu-bar{
+    background-color: #5db5a5;
+    text-align: center;
+   /* Optional set the opacity for a slightly transparent menu*/
+    
+}
+
+.menu-bar ul{
+    font-weight: 700;
+    display: inline-flex;
+    list-style: none;
+    color: white;
+    font-size: large;
+    position:relative; left:100px; 
+    display: flex;        /* Added */
+    align-items: center;  /* Added */
+    justify-content: center; /* Added */
+}
+
+.menu-bar ul li{
+  width:150px;
+  margin:15px;
+  padding:15px;
+
+}
+
+.menu-bar ul li:hover{
+  
+  background: #318878;
+  border-radius: 3px;
+  
+}
+
+.user{
+  margin:40px;
+  padding-right:40px;
+  font-size:large; 
+  overflow: visible;
+  white-space: nowrap;
+  color: white;
+  padding-left:1000px;
+  text-align:center;
+  position:relative; left:160px; 
+  display: flex;        /* Added */
+  align-items: center;  /* Added */
+  justify-content: center; /* Added */
+
+}
+
+.home{
+  margin:40px;
+  padding-right:40px;
+  padding-left:1000px;
+  font-size:large; 
+  overflow: visible;
+  white-space: nowrap;
+  color: white;
+  text-align:center;
+  position:relative; left:10px; 
+  display: flex;        /* Added */
+  align-items: center;  /* Added */
+  justify-content: center; /* Added */
+}
+
+a {
+  color: inherit; /* The link will be the same color as the surrounding text */
+  text-decoration: none; /* Removes underline */
+}
