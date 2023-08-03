@@ -14,7 +14,6 @@ session_start();
       $updatedsql = "UPDATE `user` SET `password`='$updatedpassword' WHERE `user_username`='$oldusername'";
    
       if(mysqli_query($conn, $updatedsql)){
-        $_SESSION['user_name'] = $updatedusername;  // Update the session variable
           header('Location: /web_database/map/user_settings/settings.php');
           
       } 
@@ -35,5 +34,6 @@ session_start();
         header('Location: /web_database/map/user_settings/settings.php');
       }
     }
+   
 
 ?>

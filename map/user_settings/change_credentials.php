@@ -31,22 +31,33 @@ src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js">
 
   <div class="container">
        <!-- after we include the php file, we add action option with the entire php/html file because we saw that on a video :p--> 
-      <form class="form" action="change_credentials_legit.php" method="POST">
+      <form class="form" action="change_credentials_legit.php" onsubmit = "return checkForBlank()" method="POST">
         <!-- this is the form used for the change credentials page --> 
         <div class="form__input-group">
-          <input type="text" required id="updatedUsername" class="form__input" autofocus placeholder="Username" name="updatedUsername"> 
+          <input type="text"  id="updatedUsername" class="form__input" autofocus placeholder="Username" name="updatedUsername"> 
           <div class="form__input-error-message"></div>
         </div>
         <div class="form__input-group">
-          <input type="password" required id="updatedPassword" class="form__input" autofocus placeholder="Password" name="updatedPassword"
+          <input type="password"  id="updatedPassword" class="form__input" autofocus placeholder="Password" name="updatedPassword"
            pattern="(?=.*\d)(?=.*[@$!%*#?&amp])(?=.*[A-Z]).{8,}" title="Password must contain 8 characters, at least one number, one uppercase letter, and one special character." />
           <div class="form__input-error-message"></div>
         </div>
-        <button class="form__button" type="submit" id="button" name="update" value="update">Update Credentials</button>
-
-        
+        <button class="form__button" type="submit" id="button" name="update" value="update">Update Credentials</button>       
     </form>
    </div>
+   <script>
+    function checkForBlank()
+    {
+      var username = document.getElementById('updatedUsername').value;
+      var password = document.getElementById('updatedPassword').value;
+
+      if(username.trim() == "" && password.trim() == "") {
+          alert("Both fields cannot be empty.");
+          return false;
+      }
+    } 
+  </script>
+  
 
 </body>
 </html>
