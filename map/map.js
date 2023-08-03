@@ -1596,7 +1596,7 @@ mymap.locate({setView: true, zoom: 30});
       });
 
       L.marker(e.latlng,{icon: redIcon}).addTo(mymap)
-      .bindPopup("You are within " + radius + " meters from this location.").openPopup();
+      .bindPopup("Your location").openPopup();
 
       L.circle(e.latlng, radius).addTo(mymap);
     }

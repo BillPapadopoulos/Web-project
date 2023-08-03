@@ -45,10 +45,15 @@ src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js">
     while ($row = mysqli_fetch_assoc($result)) {
       //table of username credentials
       echo "<table>";
-      echo "<tr><th>Username: </th><td>" . $row['user_username'] . "</td></tr>";
-      echo "<tr><th>Email: </th><td>" . $row['email'] . "</td></tr>";
-      echo "<tr><th>Total Tokens: </th><td>" . $row['total_tokens'] . "</td></tr>";
-      echo "<tr><th>Discounts: </th><td>" . $row['discounts'] . "</td></tr>";
+      echo "<tr><th>Username: </th><td>" . $row['user_username'] . "</td></tr>"; //username
+      echo "<tr><th>Email: </th><td>" . $row['email'] . "</td></tr>"; //email
+      echo "<tr><th>Discounts: </th><td>" . $row['discounts'] . "</td></tr>"; //istoriko prosforwn
+      echo "<tr><th>Likes: </th><td>" . $row['likes'] . "</td></tr>"; //likes
+      echo "<tr><th>Dislikes: </th><td>" . $row['dislikes'] . "</td></tr>"; //dislikes
+      echo "<tr><th>Total Score: </th><td>" . $row['total_score'] . "</td></tr>"; //total score
+      echo "<tr><th>Monthly Score: </th><td>" . $row['monthly_score'] . "</td></tr>"; //monthly score
+      echo "<tr><th>Monthly Tokens: </th><td>" . $row['premonth_tokens'] . "</td></tr>"; //monthly tokens
+      echo "<tr><th>Total Tokens: </th><td>" . $row['total_tokens'] . "</td></tr>"; //total tokens
       echo "</table><br><br>";
       // Adds a line break between tables
     } 
