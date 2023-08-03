@@ -1,7 +1,5 @@
 <?php
 session_start();
-//establish connection with database
-    $conn = mysqli_connect('localhost','root','', 'web_database');
 ?>
 <!DOCTYPE html>
 <html>
@@ -33,29 +31,20 @@ src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js">
 
   <div class="container">
        <!-- after we include the php file, we add action option with the entire php/html file because we saw that on a video :p--> 
-      <form class="form">
-        <div
-        <?php if (isset($name_error)): 
-        /*this class appears only when there is invalid username/password combination
-          here the message gets styled by css  
-        */?>
-          class="form__message form__message--error"
-        <?php endif ?>  
-        >
-          <?php if (isset($name_error)): /*here the message get printed from php*/?>
-            <span><?php echo $name_error; ?></span>
-          <?php endif ?>  
-        </div>
-        <!-- this is the first form used for the Login page --> 
+      <form class="form" action="change_credentials_legit.php" method="POST">
+        <!-- this is the form used for the change credentials page --> 
         <div class="form__input-group">
-          <input type="text" id="loginUsername" class="form__input" autofocus placeholder="Username" name="loginUsername"> 
+          <input type="text" required id="updatedUsername" class="form__input" autofocus placeholder="Username" name="updatedUsername"> 
           <div class="form__input-error-message"></div>
         </div>
         <div class="form__input-group">
-          <input type="password" id="loginPassword" class="form__input" autofocus placeholder="Password" name="loginPassword">
+          <input type="password" required id="updatedPassword" class="form__input" autofocus placeholder="Password" name="updatedPassword"
+           pattern="(?=.*\d)(?=.*[@$!%*#?&amp])(?=.*[A-Z]).{8,}" title="Password must contain 8 characters, at least one number, one uppercase letter, and one special character." />
           <div class="form__input-error-message"></div>
         </div>
-        <button class="form__button" type="submit" name="login" value="login">Update Credentials</button>
+        <button class="form__button" type="submit" id="button" name="update" value="update">Update Credentials</button>
+
+        
     </form>
    </div>
 
