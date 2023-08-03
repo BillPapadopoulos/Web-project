@@ -7,13 +7,13 @@
   box-sizing: border-box;
 }
 
-body{
-
-  font-family:sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-
-}
+body {
+    background: #cfcbc6; /* light gray */
+    background: -webkit-linear-gradient(right, #cfcbc6, #cfcbc6); /* gradient light gray for webkit browsers */
+    font-family: sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
 
 .menu-bar{
     background-color: #5db5a5;
@@ -75,3 +75,34 @@ a {
   color: white;
   border-radius: 3px;
 }
+
+.profile-settings {  
+  position: relative;
+  z-index: 1;
+  background: #d3d3d3;
+  max-width: 480px;
+  margin: 0 auto 400px;
+  padding: 45px;
+  text-align: left;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+} 
+
+.profile-settings button {
+  text-transform: uppercase;
+  outline: 0;
+  background: #29cd63;
+  width: 100%;
+  border: 10;
+  padding: 15px;
+  color: #FFFFFF;
+  font-size: 14px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+
+}
+
+.profile-settings button:hover {
+  background: #15803a;
+  border-radius: 3px;
+  }

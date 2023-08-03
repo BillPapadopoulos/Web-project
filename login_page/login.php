@@ -26,7 +26,7 @@ if(isset($_POST['login'])) {
    $_SESSION['user_name'] = $username;
    echo'<script> 
    alert("Welcome back!");
-   window.location.assign("/web_server/map/map.php");
+   window.location.assign("/web_database/map/map.php");
    </script>';
    
 

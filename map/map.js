@@ -1589,7 +1589,7 @@ mymap.locate({setView: true, zoom: 30});
     function onLocationFound(e) {            
       var radius = e.accuracy;             
       var redIcon = L.icon({
-        iconUrl: '/web_server/red_marker/red_marker.png',
+        iconUrl: '/web_database/red_marker/red_marker.png',
         iconSize: [25, 41], // size of the icon
         iconAnchor: [12, 41], // point of the icon which will correspond to marker's location
         popupAnchor: [1, -34] // point from which the popup should open relative to the iconAnchor

@@ -44,7 +44,7 @@ if(isset($_POST['register'])) {
             if($result){
                 $_SESSION['user_name'] = $username;
                 echo'<script> 
-                window.location.assign("/web_server/map/map.php");
+                window.location.assign("/web_database/map/map.php");
                 alert("Successful registration!");
                  </script>';
             }
