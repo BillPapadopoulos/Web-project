@@ -1,7 +1,8 @@
 <?php
 session_start();
+//establish connection with database
+    $conn = mysqli_connect('localhost','root','', 'web_database');
 ?>
-
 <!DOCTYPE html>
 <html>
   <title>e-katanalotis offers</title>
@@ -11,7 +12,7 @@ session_start();
 href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css"
 />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-search@3.0.2/dist/leaflet-search.min.css" />
-<link rel="stylesheet" href="map.css">
+<link rel="stylesheet" href="offers.css">
 <script
 src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js">
 </script>
@@ -21,15 +22,16 @@ src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js">
 
   <div class="menu-bar">
    <ul class="Starter Buttons">
-     <li><a href="map.php">Home</a></li>
+     <li><a href="/web_database/map/map.php">Home</a></li>
      <li><a href=#>Search Offer by Category</a></li>
      <li><a href=#>Report an Offer</a></li>
-     <li><a href="/web_database/map/show_offers/offers.php">Available Offers</a></li>
+     <li class="pressed"><a href="offers.php">Available Offers</a></li>
      <li><a href="/web_database/map/user_settings/settings.php">User : <?php echo $_SESSION['user_name']; ?> <br>Settings</a></li>
     </ul>
   </div>
-  <div id="mapid"></div>
+  <?php //<div id="mapid"></div> ?>
   <script src="map.js"></script>
 
-</body>
+  </body>
 </html>
+

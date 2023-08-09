@@ -11,6 +11,29 @@ href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css"
 />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-search@3.0.2/dist/leaflet-search.min.css" />
 <link rel="stylesheet" href="settings.css">
+
+<style>
+    .form__input-group {
+      position: relative;
+    }
+
+    .form__input-group input {
+      padding-right: 35px; /* Χώρος από τα δεξιά για το κουμπί */
+    }
+
+    .form__input-group button {
+      position: absolute;
+      top: 50%;
+      right: 10px; /*αποσταση απο δεξια*/
+      transform: translateY(-50%);
+    }
+
+    .form__input-group button img {
+      height: 18px;
+      width: 20px;
+    }
+  </style>
+
 <script
 src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js">
 </script>
@@ -40,6 +63,9 @@ src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js">
         <div class="form__input-group">
           <input type="password"  id="updatedPassword" class="form__input" autofocus placeholder="Password" name="updatedPassword"
            pattern="(?=.*\d)(?=.*[@$!%*#?&amp])(?=.*[A-Z]).{8,}" title="Password must contain 8 characters, at least one number, one uppercase letter, and one special character." />
+          <button type="button" id="togglePassword">
+            <img src="/web_database/map/user_settings/hide_pass.png" alt="Toggle Password" />
+          </button>
           <div class="form__input-error-message"></div>
         </div>
         <button class="form__button" type="submit" id="button" name="update" value="update">Update Credentials</button>       
@@ -58,6 +84,26 @@ src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js">
     } 
   </script>
   
+  <script>
+  // Συνάρτηση για toggle εμφάνισης/απόκρυψης του κωδικού
+  function togglePasswordVisibility() {
+    const passwordInput = document.getElementById('updatedPassword');
+    const toggleButton = document.getElementById('togglePassword');
+
+    if (passwordInput.type === 'password') {
+      passwordInput.type = 'text';
+      toggleButton.innerHTML = '<img src="/web_database/map/user_settings/show_pass.png" alt="Toggle Password" />';
+    } else {
+      passwordInput.type = 'password';
+      toggleButton.innerHTML = '<img src="/web_database/map/user_settings/hide_pass.png" alt="Toggle Password" />';
+    }
+  }
+
+  // Συνδέστε την συνάρτηση togglePasswordVisibility με το κουμπί
+  const toggleButton = document.getElementById('togglePassword');
+  toggleButton.addEventListener('click', togglePasswordVisibility);
+</script>
+
 
 </body>
 </html>
