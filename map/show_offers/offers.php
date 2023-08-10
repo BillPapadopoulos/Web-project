@@ -28,7 +28,21 @@ src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js">
      <li class="pressed"><a href="offers.php">Available Offers</a></li>
      <li><a href="/web_database/map/user_settings/settings.php">User : <?php echo $_SESSION['user_name']; ?> <br>Settings</a></li>
     </ul>
-  </div>
+  </div class="container">
+
+  <form  class="myform">
+  <select onchange="showOffer(this.value)">
+  <option>Select a category:</option>
+  <option>All categories</option>
+  <option>Baby Products</option>
+  <option>Drinks - refreshments</option>
+  <option>Cleaning</option>
+  <option>Food</option>
+  </select>
+  </form>
+  <br>
+  <div id="txtHint"><b>Available offers will show up here.</b></div>
+
   <?php //<div id="mapid"></div> ?>
   <script src="map.js"></script>
 

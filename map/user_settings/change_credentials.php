@@ -22,16 +22,27 @@ href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css"
     }
 
     .form__input-group button {
+      height: 22px;
       position: absolute;
       top: 50%;
       right: 10px; /*αποσταση απο δεξια*/
       transform: translateY(-50%);
+      
     }
 
     .form__input-group button img {
-      height: 18px;
-      width: 20px;
+      height: 20px;
+      width: 26px;
     }
+
+    .form__input-group .form__input-error-message {
+    position: static;
+    bottom: -10px; /* Ρυθμίζει την απόσταση από το πεδίο κωδικού */
+    left: 0;
+    color: red; /* Ρυθμίζει το χρώμα του μηνύματος */
+    font-size: 14px; /* Ρυθμίζει το μέγεθος του μηνύματος */
+    }
+
   </style>
 
 <script

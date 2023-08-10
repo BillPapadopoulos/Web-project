@@ -1,4 +1,4 @@
-#mapid { height: 700px; }
+#mapid { height: 600px; }
 
 *
 {
@@ -24,7 +24,7 @@ body {
   }
 
 .menu-bar{
-    overflow-x: hidden;
+    overflow-x: hidden; /*Διώχνει το κενό δεξία στο menu bar*/
     background-color: #5db5a5;
     text-align: center;
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
@@ -38,7 +38,7 @@ body {
     list-style: none;
     color: white;
     font-size: large;
-    position:relative; left:100px; 
+    position:relative; 
     display: flex;        /* Added */
     align-items: center;  /* Added */
     justify-content: center; /* Added */
@@ -134,7 +134,7 @@ a {
   transform: translate(-50%, -50%);
   z-index: 1;
   background: #d3d3d3;
-  width: 350px;
+  width: 300px;
   max-width: 440px;
   margin: 1rem;
   padding: 30px;

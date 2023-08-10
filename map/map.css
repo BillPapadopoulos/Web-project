@@ -1,4 +1,4 @@
-#mapid { height: 700px; }
+#mapid { height: 600px; }
 
 *
 {
@@ -30,7 +30,7 @@ body{
     list-style: none;
     color: white;
     font-size: large;
-    position:relative; left:100px; 
+    position:relative; 
     display: flex;        /* Added */
     align-items: center;  /* Added */
     justify-content: center; /* Added */
