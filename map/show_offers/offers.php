@@ -28,23 +28,46 @@ src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js">
      <li class="pressed"><a href="offers.php">Available Offers</a></li>
      <li><a href="/web_database/map/user_settings/settings.php">User : <?php echo $_SESSION['user_name']; ?> <br>Settings</a></li>
     </ul>
-  </div class="container">
+  </div>
 
-  <form  class="myform">
-  <select onchange="showOffer(this.value)">
-  <option>Select a category:</option>
-  <option>All categories</option>
-  <option>Baby Products</option>
-  <option>Drinks - refreshments</option>
-  <option>Cleaning</option>
-  <option>Food</option>
-  </select>
-  </form>
-  <br>
-  <div id="txtHint"><b>Available offers will show up here.</b></div>
 
+<div class="container">
+
+    <div class="frames">
+         <div class="frame-container">
+            <img src="images/frame1.jpg" alt="Frame 1" onclick="displayFrame(1)">
+            <span class="frame-text">Cleaning</span>
+         </div>  
+         <div class="frame-container">
+            <img src="images/frame2.jpg" alt="Frame 2" onclick="displayFrame(2)">
+            <span class="frame-text">Drinks-Refreshments</span>
+         </div>  
+         <div class="frame-container">   
+            <img src="images/frame3.jpg" alt="Frame 3" onclick="displayFrame(3)">
+            <span class="frame-text">Personal Care</span>
+         </div>  
+        <div class="frame-container">
+            <img src="images/frame4.jpg" alt="Frame 4" onclick="displayFrame(4)">
+            <span class="frame-text">Food</span>
+        </div>  
+        <div class="frame-container">
+            <img src="images/frame5.jpg" alt="Frame 5" onclick="displayFrame(5)">
+            <span class="frame-text">All categories</span>
+        </div>  
+     </div>
+
+        <div id="frameDisplay">
+            <!-- Selected frame will be displayed here -->
+        </div>
+</div>
+
+    <script src="offers.js"></script>
+
+  
   <?php //<div id="mapid"></div> ?>
   <script src="map.js"></script>
+
+  
 
   </body>
 </html>
