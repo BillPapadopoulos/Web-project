@@ -1,12 +1,3 @@
-function displayFrame(number) {
-  const frameDisplay = document.getElementById('frameDisplay');
-  frameDisplay.innerHTML = ''; // Clear current display
-  const img = document.createElement('img');
-  img.src = 'images/frame' + number + '.jpg'; 
-  frameDisplay.appendChild(img);
-}
-
-
 function displayFrame(category) {
   const frameDisplay = document.getElementById('frameDisplay');
 
@@ -23,3 +14,4 @@ function displayFrame(category) {
   xmlhttp.open("GET", "get_frame_offers.php?category=" + category, true);
   xmlhttp.send();
 }
+

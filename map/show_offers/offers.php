@@ -51,8 +51,8 @@ src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js">
             <span class="frame-text">Food</span>
         </div>  
         <div class="frame-container">
-            <img src="images/frame5.jpg" alt="Frame 5">
-            <span class="frame-text">All categories</span>
+            <img src="images/frame5.jpg" alt="Frame 5" onclick="displayFrame('All Categories')">
+            <span class="frame-text">All Categories</span>
         </div>  
      </div>
 

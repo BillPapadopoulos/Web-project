@@ -1,47 +1,50 @@
 <?php
 
+// Mapping English category names to their corresponding Greek names.
 $categoryMapping = [
   'Cleaning' => 'Καθαριότητα',
-  'Drinks-Refreshments' => 'Ποτά-Αναψυκτικά',
+  'Drinks-Refreshments' => 'Ποτά - Αναψυκτικά',
   'Personal Care' => 'Προσωπική φροντίδα',
   'Food' => 'Τρόφιμα',
 ];
 
-
-
-if (!isset($_GET['category']) || !isset($categoryMapping[$_GET['category']])) {
-  echo "Invalid category.";
-  exit;
-}
-
-$englishCategoryName = $_GET['category'];
-$greekCategoryName = $categoryMapping[$englishCategoryName];
-
-$categoryName = $_GET['category'];
-
-// Database connection
+// Establish a connection with the database.
 $connection = mysqli_connect('localhost', 'root', '', 'web_database');
 
-// Check connection
+// Check connection.
 if ($connection->connect_error) {
     die("Connection failed: " . $connection->connect_error);
 }
 
-// Using JOIN to combine product and offer tables based on product_name and filter by category_name
-$query = "SELECT o.* FROM offer o 
-          JOIN product p ON o.product_name = p.product_name 
-          WHERE p.category_name = ?";
+if (!isset($_GET['category'])) {
+  echo "Invalid category.";
+  exit;
+}
 
-echo "SQL Query: " . $query . "<br>";
+if ($_GET['category'] == 'All Categories') {
+  $query = "SELECT o.* FROM offer o";
+} else {
+  if (!isset($categoryMapping[$_GET['category']])) {
+      echo "Invalid category.";
+      exit;
+  }
+  $greekCategoryName = $categoryMapping[$_GET['category']];
+  $query = "SELECT o.* FROM offer o 
+            JOIN product p ON o.product_name = p.product_name 
+            WHERE p.category_name = ?";
+}
 
-
-// Prepare the SQL statement to prevent SQL injection
 $stmt = $connection->prepare($query);
-$stmt->bind_param("s", $categoryName);
+
+if ($_GET['category'] != 'All Categories') {
+  $stmt->bind_param("s", $greekCategoryName);
+}
+
 $stmt->execute();
 
 $result = $stmt->get_result();
 
+// Display the results.
 if ($result->num_rows > 0) {
     echo "<table>";
     echo "<tr>
