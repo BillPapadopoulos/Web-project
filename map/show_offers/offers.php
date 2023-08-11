@@ -35,23 +35,23 @@ src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js">
 
     <div class="frames">
          <div class="frame-container">
-            <img src="images/frame1.jpg" alt="Frame 1" onclick="displayFrame(1)">
+            <img src="images/frame1.jpg" alt="Frame 1"  onclick="displayFrame('Cleaning')">
             <span class="frame-text">Cleaning</span>
          </div>  
          <div class="frame-container">
-            <img src="images/frame2.jpg" alt="Frame 2" onclick="displayFrame(2)">
+            <img src="images/frame2.jpg" alt="Frame 2"  onclick="displayFrame('Drinks-Refreshments')">
             <span class="frame-text">Drinks-Refreshments</span>
          </div>  
          <div class="frame-container">   
-            <img src="images/frame3.jpg" alt="Frame 3" onclick="displayFrame(3)">
+            <img src="images/frame3.jpg" alt="Frame 3"  onclick="displayFrame('Personal Care')">
             <span class="frame-text">Personal Care</span>
          </div>  
         <div class="frame-container">
-            <img src="images/frame4.jpg" alt="Frame 4" onclick="displayFrame(4)">
+            <img src="images/frame4.jpg" alt="Frame 4"  onclick="displayFrame('Food')">
             <span class="frame-text">Food</span>
         </div>  
         <div class="frame-container">
-            <img src="images/frame5.jpg" alt="Frame 5" onclick="displayFrame(5)">
+            <img src="images/frame5.jpg" alt="Frame 5">
             <span class="frame-text">All categories</span>
         </div>  
      </div>
