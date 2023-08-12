@@ -106,7 +106,7 @@ a {
 }
 
 
-  .frames img {
+.frames img {
     width: 100%;
     height: 100%; /* Γεμίζει τον χώρο του πλαισίου */
     object-fit: cover; /* Προσαρμογή της εικόνας στο πλαίσιο χωρίς να την παραμορφώνει */
@@ -146,4 +146,37 @@ th, td {
   padding: 8px;
   text-align: center;
   border: 1px solid black;
+}
+
+.container p {
+  text-align: center; /* Κεντρική στοίχιση */
+  margin-top: 10px; 
+  margin-bottom: 20px;
+}
+
+.shop-button {
+  display: block; /* Initially set it to none, and change it to block when you want to show it */
+  margin: 10px auto; /* Center it */
+  padding: 5px 15px; /* Padding to give it space */
+  background-color: #5db5a5; /* From your .menu-bar */
+  color: white; /* Text color */
+  font-weight: 700; /* Bold font from .menu-bar ul */
+  font-size: large; /* From .menu-bar ul */
+  border: none; /* No border */
+  border-radius: 3px; /* From .menu-bar ul li:hover */
+  cursor: pointer; /* Hand cursor on hover */
+  text-align: center;
+  transition: opacity 0.3s, background-color 0.3s; /* Smooth transition for hover effects */
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24); /* From .menu-bar */
+  text-decoration: none; /* In case it's a link later */
+}
+
+.shop-button:hover {
+  background-color: #318878; /* Darker color on hover, from .menu-bar ul li:hover */
+  opacity: 0.9; /* Slight fade on hover for effect */
+}
+
+#frameDisplayTable {
+  transition: opacity 0.5s; /* 0.5s is the duration of the transition, you can adjust it */
+  opacity: 1; /* Fully visible by default */
 }

@@ -31,8 +31,8 @@ src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js">
   </div>
 
 
-<div class="container">
-
+  <div class="container">
+  <p>Welcome to our offers page! Explore the available categories and find exciting deals.</p>
     <div class="frames">
          <div class="frame-container">
             <img src="images/frame1.jpg" alt="Frame 1"  onclick="displayFrame('Cleaning')">
@@ -54,21 +54,27 @@ src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js">
             <img src="images/frame5.jpg" alt="Frame 5" onclick="displayFrame('All Categories')">
             <span class="frame-text">All Categories</span>
         </div>  
-     </div>
+    </div>
+    <div id="frameDisplayTable">
+      <!-- The table will be displayed here -->
+    </div>
 
-        <div id="frameDisplay">
-            <!-- Selected frame will be displayed here -->
-        </div>
-</div>
 
-    <script src="offers.js"></script>
+    <div id="frameDisplay">
+      <!-- Selected frame will be displayed here -->
+        <button class="shop-button" style="display: none;" onclick="redirectToFilteredMap('Cleaning')">Show Shops with Offers for Cleaning</button>
+        <button class="shop-button" style="display: none;" onclick="redirectToFilteredMap('Drinks-Refreshments')">Show Shops with Offers for Drinks-Refreshments</button>
+        <button class="shop-button" style="display: none;" onclick="redirectToFilteredMap('Personal Care')">Show Shops with Offers for Personal Care</button>
+        <button class="shop-button" style="display: none;" onclick="redirectToFilteredMap('Food')">Show Shops with Offers for Food</button>
+        <button class="shop-button" style="display: none;" onclick="redirectToFilteredMap('All Categories')">Show Shops with Offers for All Categories</button>
+    </div>
+  </div>
+  <script src="offers.js"></script>
+  <script src="filteredmap.js"></script>
 
   
-  <?php //<div id="mapid"></div> ?>
-  <script src="map.js"></script>
 
-  
 
-  </body>
+</body>
 </html>
 

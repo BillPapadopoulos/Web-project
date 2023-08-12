@@ -1,0 +1,78 @@
+#mapid { height: 600px; }
+
+*
+{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body{
+
+  font-family:sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+}
+
+.menu-bar{
+   overflow-x: hidden;
+    background-color: #5db5a5;
+    text-align: center;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+   /* Optional set the opacity for a slightly transparent menu*/
+    
+}
+
+.menu-bar ul{
+    font-weight: 700;
+    display: inline-flex;
+    list-style: none;
+    color: white;
+    font-size: large;
+    position:relative; 
+    display: flex;        /* Added */
+    align-items: center;  /* Added */
+    justify-content: center; /* Added */
+}
+
+.menu-bar ul li{
+  width:150px;
+  margin:10px;
+  padding:5px;
+
+}
+
+.menu-bar ul li:hover{
+  
+  background: #318878;
+  border-radius: 3px;
+  
+}
+
+.user{
+  margin:40px;
+  padding-right:40px;
+  font-size:large; 
+  overflow: visible;
+  white-space: nowrap;
+  color: white;
+  padding-left:1000px;
+  text-align:center;
+  position:relative; left:160px; 
+  display: flex;        /* Added */
+  align-items: center;  /* Added */
+  justify-content: center; /* Added */
+
+}
+
+a {
+  color: inherit; /* The link will be the same color as the surrounding text */
+  text-decoration: none; /* Removes underline */
+}
+
+.pressed{
+  background-color: #115b4a;
+  color: white;
+  border-radius: 3px;
+}
