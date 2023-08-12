@@ -59,6 +59,7 @@ if ($result->num_rows > 0) {
             <th>Price Lower Than Preday</th>
             <th>Price Lower Than Preweek</th>
           </tr>";
+          
     while ($row = $result->fetch_assoc()) {
         echo "<tr>
                 <td>" . $row["offer_id"] . "</td>
