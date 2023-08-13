@@ -32,6 +32,7 @@ src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js">
   <script src="dataScript.js"></script>  <!-- data is defined in a separate script -->
   <script src="filteredmap.js"></script>
   <script src="offers.js"></script>
-
+  
+  
 </body>
 </html>

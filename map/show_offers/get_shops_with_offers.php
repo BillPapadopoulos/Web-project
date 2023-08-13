@@ -5,6 +5,13 @@ if ($connection->connect_error) {
     die("Connection failed: " . $connection->connect_error);
 }
 
+$categoryMapping = [
+    'Cleaning' => 'Καθαριότητα',
+    'Drinks-Refreshments' => 'Ποτά - Αναψυκτικά',
+    'Personal Care' => 'Προσωπική φροντίδα',
+    'Food' => 'Τρόφιμα',
+];
+
 $category = $_GET['category'];
 $greekCategoryName = $categoryMapping[$category]; // Use the mapping you provided earlier
 
@@ -29,7 +36,7 @@ while ($row = $result->fetch_assoc()) {
     'longitude' => $row['lon']
     ];
 }
-echo json_encode($shopIDs);
+echo json_encode($shops);
 $stmt->close();
 $connection->close();
 ?>
