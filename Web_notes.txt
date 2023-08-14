@@ -1,15 +1,15 @@
 ΤΙ ΜΕΝΕΙ ΓΙΑ WEB
 
 
-- Εικονιδιο χρηστη διπλα απο το ονομα του χρηστη
-- Ελεγχος στο create Account Form για τον κωδικο. Σε περιπτωση που υπαρχει οποιοδηποτε λαθος στον κωδικο, η εγγραφη χρηστη γινεται κανονικα
-- Να φαινεται ο κωδικος οταν τον φτιαχνουμε(με ματακι)
-- Διαφορετικο form για τo login του admin(Θα υπαρχει ηδη στη βαση, δε θα δημιουργειται)
-- Το forgot your password δεν οδηγει καπου
+
+
 - Stored procedure στη βαση για να τσεκαρει αν η ακτινα αποστασης του χρηστη που υποβαλει τη προσφορα, ειναι μικροτερη του 50 μεσω συναρτησης ριζας lat² και lon²
 - Stored procedure στη βαση για να τσεκαρει οτι μια νεα προσφορα εχει 20% μικροτερη τιμη απο αυτη που υπαρχει ηδη
-- Δεν εχουμε ιδεα πως γινονται τα stored procedures στο phpmyadmin->google
 
+
+1) Να προστεθει αν υπαρχουν προσφορες στον πινακα shops, ωστε να ελεγχεται μεσω php αν ενα καταστημα εχει προσφορα και να μπαινει διαφορετικο μαρκερ.
+2) Στην σελιδα available offers να δημιουργηθει κουμπι για φιλτραρισμενο χαρτη, αντι για οντοτητα στο μενου. Οταν πατιεται θα βλεπει ο χρηστης μονο τα σουπερμαρκετ που εχουν προσφορες.
+3) Trigger για οταν μπαινει μια νεα προσφορα απο καποιον χρηστη, να ενημερωνεται το πεδιο discounts του user.
 
 
 
@@ -20,3 +20,40 @@
 - Τα shops εχουν ολα διαφορετικη ονομασια και οσα εχουν ιδιο ονομα, εχουν αριθμηση για να γινεται το search σωστα
 - Τα subcategory μπηκαν χειροκινητα
  
+
+
+
+
+DELIMITER $
+
+CREATE TRIGGER update_shop_offers
+AFTER INSERT ON offer
+FOR EACH ROW
+BEGIN
+    UPDATE shop
+    SET offers = 1
+    WHERE shop_id = NEW.shop_id;
+END;
+$
+
+DELIMITER ;
+
+
+DELIMITER $
+
+CREATE TRIGGER update_shop_offers_on_delete
+AFTER DELETE ON offer
+FOR EACH ROW
+BEGIN
+    DECLARE shop_offer_count INT;
+    SET shop_offer_count = (SELECT COUNT(*) FROM offer WHERE shop_id = OLD.shop_id);
+    
+    IF shop_offer_count = 0 THEN
+        UPDATE shop
+        SET offers = 0
+        WHERE shop_id = OLD.shop_id;
+    END IF;
+END;
+$
+
+DELIMITER ;
