@@ -57,3 +57,31 @@ END;
 $
 
 DELIMITER ;
+
+
+DELIMITER $
+
+CREATE TRIGGER likes_add_tokens
+AFTER UPDATE ON OFFER
+FOR EACH ROW 
+BEGIN
+UPDATE USER
+SET total_tokens = total_tokens + 5
+WHERE (NEW.likes = OLD.likes + 1 AND USER.user_username = NEW.user_username);
+END$
+
+DELIMITER ;
+
+DELIMITER $
+CREATE TRIGGER dislikes_subtracts_tokens
+AFTER UPDATE ON OFFER
+FOR EACH ROW 
+BEGIN
+UPDATE USER
+SET total_tokens = total_tokens - 1
+WHERE (NEW.dislikes = OLD.dislikes + 1 AND USER.user_username = NEW.user_username); 
+END$
+DELIMITER ;
+
+
+
