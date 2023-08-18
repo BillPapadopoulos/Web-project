@@ -1,5 +1,23 @@
 <?php
 session_start();
+$conn = mysqli_connect('localhost','root','', 'web_database');
+
+
+
+
+$X=21.7543673;
+$Y=38.21940422;
+
+  $query="  SELECT lat, lon, shop_name, shop_id FROM shop 
+  WHERE ((SQRT(POWER(".$X."-lon, 2) + POWER(".$Y."-lat,2)))*100000)<1500";
+
+  $result = $conn->query($query); 
+  while($row = $result->fetch_array())
+{
+
+  $data[] = array("lat"=>$row["lat"], "lon"=>$row["lon"], "Details"=>$row['shop_name'], "ID"=>$row["shop_id"]);
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -29,7 +47,65 @@ src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js">
     </ul>
   </div>
   <div id="mapid"></div>
-  <script src="map.js"></script>
+  <script>
+
+    
+    
+var mapOptions = {
+  zoom: 40,
+  center: L.latLng([21.7380288,38.24957])
+} //set center for initial map
+let mymap = L.map('mapid',mapOptions); 
+
+mymap.addLayer(L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png'));
+
+
+//this is the initial position when the app opens
+
+mymap.locate({setView: true, zoom: 30}); 
+  
+  function onLocationFound(e) {            
+      var radius = e.accuracy;             
+      var redIcon = L.icon({
+        iconUrl: '/web_database/red_marker/red_marker.png',
+        iconSize: [25, 41], // size of the icon
+        iconAnchor: [12, 41], // point of the icon which will correspond to marker's location
+        popupAnchor: [1, -34] // point from which the popup should open relative to the iconAnchor
+      });
+
+      L.marker(e.latlng,{icon: redIcon}).addTo(mymap)
+      .bindPopup("Your location").openPopup();
+
+      L.circle(e.latlng, radius).addTo(mymap);
+    }
+
+    mymap.on('locationfound', onLocationFound);
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+  
+
+      var city = L.layerGroup();
+        var data = <?php echo json_encode($data); ?>;
+        for (var i = 0; i < data.length; i++) {
+          var new_location = new L.LatLng(data[i].lat, data[i].lon);
+          var place = data[i].Details;
+          var shop = data[i].Shop;
+          var shop_id = data[i].ID;
+          var marker = new L.Marker(new_location, {
+            title: place
+          });
+          var message = 'Name: ' +place+'<br>ID: '+shop_id;
+          marker.bindPopup(message+'<br><button onclick="window.location.href=\'Discount_Submit.html\';">Υποβολή Προσφοράς</button>');
+          city.addLayer(marker);
+        
+          
+        }
+
+      mymap.addLayer(city);
+
+
+
+
+  </script>
 
 </body>
 </html>
