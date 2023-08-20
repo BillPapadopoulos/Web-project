@@ -58,7 +58,7 @@ if ($result->num_rows > 0) {
             <th>Likes</th>
             <th>Dislikes</th>
             <th>Register Date</th>
-            <th>Availaility</th>
+            <th>Availability</th>
             <th>Price Lower Than Preday</th>
             <th>Price Lower Than Preweek</th>
           </tr>";

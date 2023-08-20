@@ -63,6 +63,7 @@ mymap.addLayer(L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png'));
 //this is the initial position when the app opens
 
 mymap.locate({setView: true, zoom: 30}); 
+
   
   function onLocationFound(e) {            
       var radius = e.accuracy;             
@@ -72,12 +73,14 @@ mymap.locate({setView: true, zoom: 30});
         iconAnchor: [12, 41], // point of the icon which will correspond to marker's location
         popupAnchor: [1, -34] // point from which the popup should open relative to the iconAnchor
       });
+      
 
       L.marker(e.latlng,{icon: redIcon}).addTo(mymap)
       .bindPopup("Your location").openPopup();
 
       L.circle(e.latlng, radius).addTo(mymap);
     }
+
 
     mymap.on('locationfound', onLocationFound);
     ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -88,13 +91,12 @@ mymap.locate({setView: true, zoom: 30});
         for (var i = 0; i < data.length; i++) {
           var new_location = new L.LatLng(data[i].lat, data[i].lon);
           var place = data[i].Details;
-          var shop = data[i].Shop;
           var shop_id = data[i].ID;
           var marker = new L.Marker(new_location, {
             title: place
           });
           var message = 'Name: ' +place+'<br>ID: '+shop_id;
-          marker.bindPopup(message+'<br><button onclick="window.location.href=\'Discount_Submit.html\';">Υποβολή Προσφοράς</button>');
+          marker.bindPopup(message+'<br><button class="submit_button_offer" onclick="window.location.href=\'offer_submission.php\';">Submit Offer</button>');
           city.addLayer(marker);
         
           

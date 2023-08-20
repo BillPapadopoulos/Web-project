@@ -180,3 +180,24 @@ th, td {
   transition: opacity 0.5s; /* 0.5s is the duration of the transition, you can adjust it */
   opacity: 1; /* Fully visible by default */
 }
+
+.submit_button_offer{
+  background-color: #5db5a5;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+
+}
+
+.submit_button_offer:hover,.submit_button_offer:active,.submit_button_offer:focus {
+  background: #007f67;
+}
+
+

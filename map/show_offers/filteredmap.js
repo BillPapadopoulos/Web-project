@@ -58,7 +58,7 @@ function displayShopsWithOffers(category) {
       data.forEach(shop => {
         console.log(shop.name); // debug
           L.marker([shop.latitude, shop.longitude])
-              .bindPopup(shop.name)
+              .bindPopup(shop.name) //shows in the pop up
               .addTo(markersLayer);  // Attach the markers to the markersLayer
       });
   })
