@@ -79,7 +79,7 @@ a {
 
 
 .form {  /* Παραμετροποιείται το εσωτερικό πλαίσιο της φόρμας */
-  position: flex;
+  position: relative;
   z-index: 1;
   background: #d1e3ed;
   max-width: 515px;
@@ -124,18 +124,15 @@ a {
 
 
 .select-dropdown{
-  margin: 0;
+  margin: 0 auto;
   padding: 0;
   position: relative;
+  background-color: #f2f2f2;
   box-sizing: border-box;
   text-align: center;
+  border-radius: 4px; 
 }
-.select-dropdown {
-  position: relative;
-  background-color: #f2f2f2;
-  border-radius: 4px;
-  text-align: center;
-}
+
 
 
 .select-dropdown select {
@@ -148,6 +145,11 @@ a {
     -webkit-appearance: none;
     -moz-appearance: none;
   appearance: none;
+  text-align-last: center;
+}
+
+.select-dropdown select option {
+  text-align: center; /* Center-align the text within each option */
 }
 
 .select-dropdown select:active, .select-dropdown select:focus {

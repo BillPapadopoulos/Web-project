@@ -52,16 +52,16 @@ src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js">
                     <option value="" selected="selected">Choose product</option>
                 </select>
             </div>
-            <br><br>  
-            <label for="price"><b>Price of product: </b></label>
-            <br><br>  
-            <input type="number" id="price" name="price" min="0" max="100" step="0.01">
-            <br><br>  
+            <br><br>
             <div class="select-dropdown">
             <select name="shop" id="shopDropdown">
              <option value="" selected="selected">Choose shop</option>
             </select>
-            </div>
+            </div>  
+            <br><br>
+            <label for="price"><b>Price of product: </b></label>
+            <input id="price" name="price">
+              
             <br><br>
             <button><b>Offer Registration</b></button>          
         </form>
