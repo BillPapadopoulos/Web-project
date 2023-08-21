@@ -34,7 +34,7 @@ src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js">
   </div>
 
 <div class="form">
-        <form name="form_discount_register" class="form_discount_register" id="form_discount_register" action="Discount_Register.php">
+        <form name="form_discount_register" class="form_discount_register" id="form_discount_register" action="/web_database/map/report_offer/offer_registration.php" method="post">
             <div class="select-dropdown">
             <select name="category" id="categoryDropdown" onchange="fetchSubcategories(this.value);">
             <option value="" selected="selected">Choose category</option>
@@ -60,10 +60,11 @@ src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js">
             </div>  
             <br><br>
             <label for="price"><b>Price of product: </b></label>
+            <br><br>
             <input id="price" name="price">
               
             <br><br>
-            <button><b>Offer Registration</b></button>          
+            <button type="submit"><b>Offer Registration</b></button>          
         </form>
     </div>
 

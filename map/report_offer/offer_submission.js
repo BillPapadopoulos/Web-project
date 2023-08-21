@@ -2,10 +2,6 @@ window.onload = function() {
   fetchCategories();
   fetchShops();
 
-  document.getElementById('categoryDropdown').addEventListener('change', function() {
-    fetchSubcategories(this.value);
-  });
-
 };
 
 function fetchCategories() {
@@ -75,7 +71,7 @@ function fetchShops() {
           data.forEach(shop => {
               let option = document.createElement('option');
               option.text = shop.shop_name;
-              option.value = shop.shop_id;
+              option.value = shop.shop_id; //we get the shop ids already even tho the shop name is what the user selects
               dropdown.add(option);
           });
       })
