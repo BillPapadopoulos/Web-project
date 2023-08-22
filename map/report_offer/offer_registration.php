@@ -36,12 +36,10 @@ echo "Username: " . $user_username;
 $likes = 0;
 $dislikes = 0;
 $register_date = date('Y-m-d'); // Current date
-$price_lower_than_preday = 0; // Set a default value; adjust as needed
-$price_lower_than_preweek = 0; // Set a default value; adjust as needed
 mysqli_query($conn, "SET foreign_key_checks = 0");
 // SQL to insert new data
-$stmt = $conn->prepare("INSERT INTO offer (product_name, shop_id, user_username, price, likes, dislikes, register_date, price_lower_than_preday, price_lower_than_preweek) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
-$stmt->bind_param("siisdiiii", $product_name, $shop_id, $user_username, $price, $likes, $dislikes, $register_date, $price_lower_than_preday, $price_lower_than_preweek);
+$stmt = $conn->prepare("INSERT INTO offer (product_name, shop_id, user_username, price, likes, dislikes, register_date) VALUES (?, ?, ?, ?, ?, ?, ?)");
+$stmt->bind_param("sisdiis", $product_name, $shop_id, $user_username, $price, $likes, $dislikes, $register_date);
 
 if($stmt->execute()) {
     header("Location: report_offer.php");
