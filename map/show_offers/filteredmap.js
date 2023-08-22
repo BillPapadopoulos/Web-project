@@ -26,7 +26,7 @@ function onLocationFound(e) {
 
 mymap.on('locationfound', onLocationFound);
 
-let featuresLayer = new L.GeoJSON(undefined, {  // Initialize featuresLayer (Assuming you have data for it somewhere in your code)
+let featuresLayer = new L.GeoJSON(undefined, {  // Initialize featuresLayer
     onEachFeature: function (feature, layer) {
         layer.bindPopup(feature.properties.name);
     }

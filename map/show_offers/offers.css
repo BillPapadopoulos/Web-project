@@ -76,12 +76,14 @@ a {
 
 
 .container {
+  max-height: calc(100vh - 200px);  /* Υπολογίζει το ύψος του container για να χωράει κάτω από το menu bar */
+  overflow-y: auto; /* Προσθέτει κάθετη ολίσθηση όταν το περιεχόμενο υπερβαίνει το ύψος */
   width: 80%;
   position: absolute;
   top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
-  margin-top: 50px;
+  margin-top: 70px;
   background-color: #f8f8f8a9;
   padding: 20px;
   border-radius: 5px;

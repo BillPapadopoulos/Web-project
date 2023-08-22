@@ -13,19 +13,29 @@ $categoryMapping = [
 ];
 
 $category = $_GET['category'];
-$greekCategoryName = $categoryMapping[$category]; // Use the mapping you provided earlier
 
-$query = "SELECT DISTINCT s.* 
+if($category == 'All Categories') {
+    $query = "SELECT DISTINCT s.* 
+          FROM shop s 
+          JOIN offer o ON s.shop_id = o.shop_id";
+} else {
+    $greekCategoryName = $categoryMapping[$category]; // Use the mapping you provided earlier
+
+    $query = "SELECT DISTINCT s.* 
           FROM shop s 
           JOIN offer o ON s.shop_id = o.shop_id 
           JOIN product p ON o.product_name = p.product_name 
           WHERE p.category_name = ?";
+}
 
-$stmt = $connection->prepare($query);
-$stmt->bind_param("s", $greekCategoryName);
-$stmt->execute();
-
-$result = $stmt->get_result();
+if($category != 'All Categories') {
+    $stmt = $connection->prepare($query);
+    $stmt->bind_param("s", $greekCategoryName);
+    $stmt->execute();
+    $result = $stmt->get_result();
+} else {
+    $result = $connection->query($query);
+}
 
 $shops = [];
 while ($row = $result->fetch_assoc()) {
@@ -37,6 +47,5 @@ while ($row = $result->fetch_assoc()) {
     ];
 }
 echo json_encode($shops);
-$stmt->close();
 $connection->close();
 ?>

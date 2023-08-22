@@ -59,8 +59,6 @@ if ($result->num_rows > 0) {
             <th>Dislikes</th>
             <th>Register Date</th>
             <th>Availability</th>
-            <th>Price Lower Than Preday</th>
-            <th>Price Lower Than Preweek</th>
           </tr>";
           
     while ($row = $result->fetch_assoc()) {
@@ -70,12 +68,16 @@ if ($result->num_rows > 0) {
                 <td>" . $row["shop_name"] . "</td>
                 <td>" . $row["user_username"] . "</td>
                 <td>" . $row["price"] . "</td>
-                <td>" . $row["likes"] . "</td>
-                <td>" . $row["dislikes"] . "</td>
+                <td id='like-count-" . $row["offer_id"] . "'>" . $row["likes"] . "</td>
+                <td id='dislike-count-" . $row["offer_id"] . "'>" . $row["dislikes"] . "</td>
                 <td>" . $row["register_date"] . "</td>
                 <td>" . $row["availability"] . "</td>
-                <td>" . $row["price_lower_than_preday"] . "</td>
-                <td>" . $row["price_lower_than_preweek"] . "</td>
+                <td>
+                <img src='images/like.png' onclick='likeOffer(" . $row["offer_id"] . ")' class='like-dislike-button'>
+                </td>
+                <td>
+                <img src='images/dislike.png' onclick='dislikeOffer(" . $row["offer_id"] . ")' class='like-dislike-button'>
+            </td>
               </tr>";
     }
     echo "</table>";
@@ -87,4 +89,16 @@ $stmt->close();
 $connection->close();
 
 ?>
+<style>
+    .like-dislike-button {
+        cursor: pointer;
+        width: 20px; /* Adjust the size as needed */
+        height: 20px; /* Adjust the size as needed */
+        margin-right: 10px; /* Add spacing between the buttons */
+        display: inline-block; /* Display buttons inline */
+    }
+</style>
 
+<script>
+  src = "get_frame_offers.js"
+</script>

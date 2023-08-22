@@ -23,8 +23,8 @@ src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js">
    <ul class="Starter Buttons">
      <li><a href="map.php">Home</a></li>
      <li><a href=#>Search Offer by Category</a></li>
-     <li><a href="report_offer.php">Report an Offer</a></li>
-     <li class="pressed"><a href=#>Available Offers</a></li>
+     <li><a href="/web_database/map/report_offer/report_offer.php">Report an Offer</a></li>
+     <li class="pressed"><a href="/web_database/map/show_offers/offers.php">Available Offers</a></li>
      <li><a href="settings.php">User : <?php echo $_SESSION['user_name']; ?> <br>Settings</a></li>
     </ul>
   </div>
