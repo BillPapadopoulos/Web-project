@@ -2,6 +2,9 @@
   session_start();
   $conn = mysqli_connect('localhost','root','', 'web_database');
 
+  $selectedShopId = isset($_GET['selected_shop']) ? intval($_GET['selected_shop']) : null;
+
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -19,6 +22,9 @@ src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-search/3.0.2/leaflet-search.min.js"></script>
 <script src="offer_submission.js"></script>
   
+<script>
+    var selectedShopId = <?php echo json_encode($selectedShopId); ?>;
+</script>
 
 </head>
 <body>

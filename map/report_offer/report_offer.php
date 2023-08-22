@@ -96,11 +96,16 @@ mymap.locate({setView: true, zoom: 30});
             title: place
           });
           var message = 'Name: ' +place+'<br>ID: '+shop_id;
-          marker.bindPopup(message+'<br><button class="submit_button_offer" onclick="window.location.href=\'offer_submission.php\';">Submit Offer</button>');
+          marker.bindPopup(message+'<br><button class="submit_button_offer" onclick="submitOfferForShop(' + shop_id + ')">Submit Offer</button>');
           city.addLayer(marker);
         
           
         }
+
+        function submitOfferForShop(shopId) {
+            window.location.href = 'offer_submission.php?selected_shop=' + shopId;
+        }
+
 
       mymap.addLayer(city);
 

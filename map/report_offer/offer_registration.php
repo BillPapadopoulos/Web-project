@@ -1,6 +1,6 @@
 <?php
 session_start();
-$conn = mysqli_connect('localhost','root','', 'web_database');
+$conn = mysqli_connect('localhost', 'root', '', 'web_database');
 
 // Check connection
 if (!$conn) {
@@ -8,13 +8,12 @@ if (!$conn) {
 }
 
 // Capture form data
-
 $product_id = mysqli_real_escape_string($conn, $_POST['product']);
 
 // Get the product_name using product_id
 $product_query = "SELECT product_name FROM product WHERE product_id = ?";
 $stmt = $conn->prepare($product_query);
-$stmt->bind_param("i", $product_id); // "i" means integer
+$stmt->bind_param("i", $product_id);
 $stmt->execute();
 $result = $stmt->get_result();
 
@@ -25,7 +24,7 @@ if ($result->num_rows > 0) {
     die("Product not found");
 }
 
-$shop_id = mysqli_real_escape_string($conn, $_POST['shop']); // Directly getting shop_id from the form
+$shop_id = mysqli_real_escape_string($conn, $_POST['shop']);
 $price = mysqli_real_escape_string($conn, $_POST['price']);
 
 // Retrieve the username from session
@@ -35,27 +34,21 @@ echo "Username: " . $user_username;
 // Set default values for likes, dislikes, register_date, etc.
 $likes = 0;
 $dislikes = 0;
-$register_date = date('Y-m-d'); // Current date
+$register_date = date('Y-m-d');
+
+// Disable foreign key checks (use with caution)
 mysqli_query($conn, "SET foreign_key_checks = 0");
+
 // SQL to insert new data
 $stmt = $conn->prepare("INSERT INTO offer (product_name, shop_id, user_username, price, likes, dislikes, register_date) VALUES (?, ?, ?, ?, ?, ?, ?)");
 $stmt->bind_param("sisdiis", $product_name, $shop_id, $user_username, $price, $likes, $dislikes, $register_date);
 
-if($stmt->execute()) {
+if ($stmt->execute()) {
+    mysqli_query($conn, "SET foreign_key_checks = 1"); // Re-enable foreign key checks
     header("Location: report_offer.php");
     exit();
 } else {
     echo "Error: " . $stmt->error;
-}
-
-// Execute SQL and check for errors
-if (mysqli_query($conn, $sql)) {
-    // Redirect to report_offer.php
-    mysqli_query($conn, "SET foreign_key_checks = 1");
-    header("Location: report_offer.php");
-    exit();
-} else {
-    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
 }
 
 mysqli_close($conn);

@@ -61,21 +61,33 @@ function fetchProducts(subcategoryId) {
   }
 }
 
-function fetchShops() {
-  fetch('fetch_shops.php')
-      .then(response => response.json())
-      .then(data => {
-          let dropdown = document.getElementById('shopDropdown');
-          dropdown.length = 1;
-
-          data.forEach(shop => {
-              let option = document.createElement('option');
-              option.text = shop.shop_name;
-              option.value = shop.shop_id; //we get the shop ids already even tho the shop name is what the user selects
-              dropdown.add(option);
-          });
-      })
-      .catch(error => {
-          console.error('Error fetching shops:', error);
-      });
+function setSelectedShop() {
+    if (selectedShop) {
+        var shopDropdown = document.getElementById('shopDropdown');
+        shopDropdown.value = selectedShop;
+    }
 }
+
+
+function fetchShops() {
+    fetch('fetch_shops.php')
+        .then(response => response.json())
+        .then(data => {
+            let dropdown = document.getElementById('shopDropdown');
+            dropdown.length = 1;
+  
+            data.forEach(shop => {
+                let option = document.createElement('option');
+                option.text = shop.shop_name;
+                option.value = shop.shop_id;
+                if (shop.shop_id == selectedShopId) {
+                    option.selected = true;
+                }
+                dropdown.add(option);
+            });
+        })
+        .catch(error => {
+            console.error('Error fetching shops:', error);
+        });
+  }
+  
