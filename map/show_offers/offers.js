@@ -45,8 +45,8 @@ function likeDislike(offerId, action) {
             if(response.success) {
                 document.getElementById('like-count-' + offerId).textContent = response.likesCount || 0;
                 document.getElementById('dislike-count-' + offerId).textContent = response.dislikesCount || 0;
-                //console.log(likesCount);
-                console.log(dislikesCount);
+                console.log(response.likesCount);
+                console.log(response.dislikesCount);
             } else {
                 alert(response.message); // Display the error message received from the server
             }

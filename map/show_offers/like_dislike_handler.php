@@ -63,10 +63,12 @@ if ($hasPreviousAction) {
     exit;
     } else {
         // User is changing their action (e.g., from like to dislike)
-        $query = "UPDATE offer 
-                SET likes = IF(action = 'like', likes - 1, likes + 1), 
-                dislikes = IF(action = 'dislike', dislikes - 1, dislikes + 1) 
-                WHERE offer_id = ?";
+        
+        if ($previousAction == 'like') {
+            $query = "UPDATE offer SET likes = likes - 1, dislikes = dislikes + 1 WHERE offer_id = ?";
+        } else {
+            $query = "UPDATE offer SET likes = likes + 1, dislikes = dislikes - 1 WHERE offer_id = ?";
+        }   
         $stmt = $connection->prepare($query);
         $stmt->bind_param("i", $offerId);
         $stmt->execute();
@@ -78,8 +80,18 @@ if ($hasPreviousAction) {
         $updateStmt->bind_param("sii", $action, $userId, $offerId);
         $updateStmt->execute();
         $updateStmt->close();
-
         
+        // Get the new like/dislike count
+        $query = "SELECT likes, dislikes FROM offer WHERE offer_id = ?";
+        $stmt = $connection->prepare($query);
+        $stmt->bind_param("i", $offerId);
+        $stmt->execute();
+        $stmt->bind_result($likesCount, $dislikesCount);
+        $stmt->fetch();
+        $stmt->close();
+
+        echo json_encode(['success' => true, 'likesCount' => $likesCount, 'dislikesCount' => $dislikesCount]);
+        exit();
     }
 } else {
     // User is taking an action for the first time
