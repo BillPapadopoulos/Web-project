@@ -143,5 +143,37 @@ END;
 $
 DELIMITER ;
 
+====================================================================================================================
+-- Trigger to update likes or dislikes AFTER INSERT on the user_like_dislike table
+DELIMITER $$
+CREATE TRIGGER `increment_user_likes_dislikes_after_insert` 
+AFTER INSERT ON `user_like_dislike`
+FOR EACH ROW 
+BEGIN
+    -- If the action is a like
+    IF NEW.action = 'like' THEN
+        UPDATE `user` SET `likes` = `likes` + 1 WHERE `user_id` = NEW.user_id;
+    ELSE
+        UPDATE `user` SET `dislikes` = `dislikes` + 1 WHERE `user_id` = NEW.user_id;
+    END IF;
+END;
+$$
+
+-- Trigger to update likes or dislikes AFTER DELETE on the user_like_dislike table
+DELIMITER $$
+CREATE TRIGGER `decrement_user_likes_dislikes_after_delete` 
+AFTER DELETE ON `user_like_dislike`
+FOR EACH ROW 
+BEGIN
+    -- If the action was a like
+    IF OLD.action = 'like' THEN
+        UPDATE `user` SET `likes` = `likes` - 1 WHERE `user_id` = OLD.user_id;
+    ELSE
+        UPDATE `user` SET `dislikes` = `dislikes` - 1 WHERE `user_id` = OLD.user_id;
+    END IF;
+END;
+$$
+DELIMITER ;
+
 
 
