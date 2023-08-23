@@ -3,14 +3,8 @@
 
 
 
-- Stored procedure στη βαση για να τσεκαρει αν η ακτινα αποστασης του χρηστη που υποβαλει τη προσφορα, ειναι μικροτερη του 50 μεσω συναρτησης ριζας lat² και lon²
-- Stored procedure στη βαση για να τσεκαρει οτι μια νεα προσφορα εχει 20% μικροτερη τιμη απο αυτη που υπαρχει ηδη
 
-
-1) Να προστεθει αν υπαρχουν προσφορες στον πινακα shops, ωστε να ελεγχεται μεσω php αν ενα καταστημα εχει προσφορα και να μπαινει διαφορετικο μαρκερ.
-2) Trigger για οταν μπαινει μια νεα προσφορα απο καποιον χρηστη, να ενημερωνεται το πεδιο discounts του user.
-3) Δεν υπαρχει νοημα να φτιαχτει stored procedure για τα μαγαζια που εισαι κοντα γιατι ελεγχεται απο php αυτο και δε μπορει να καλειται συνεχεια.
-
+5) αλλαγη κωδικα σε ονοματα μεταβλητων στο φορμ
 
 ΠΑΡΑΔΟΧΕΣ
 
@@ -18,8 +12,8 @@
 - Τα json αρχεια εχουν υποστει επεξεργασια για να μπουν στη βαση μας
 - Τα shops εχουν ολα διαφορετικη ονομασια και οσα εχουν ιδιο ονομα, εχουν αριθμηση για να γινεται το search σωστα
 - Τα subcategory μπηκαν χειροκινητα
-- Η αποσταση για υποβολη προσφορας αντι για 50 μετρα ειναι 1000 μετρα λογω των περιοχων που ζουμε(δεν εχει πολλα supermarket κοντα)
-
+- Η αποσταση για υποβολη προσφορας αντι για 50 μετρα ειναι 1500 μετρα λογω των περιοχων που ζουμε(δεν εχει πολλα supermarket κοντα)
+- Ενας χρηστης παιρνει τοκενς οταν η προσφορα που δημοσιευει εχει 20% μικροτερη τιμη απο τον μεσο ορο των τιμων του προιοντος σε 5 μερες(απο τον πινακα price_variety)
 
 ==========================================================================================================================================================================
 
@@ -87,6 +81,66 @@ UPDATE USER
 SET total_tokens = total_tokens - 1
 WHERE (NEW.dislikes = OLD.dislikes + 1 AND USER.user_username = NEW.user_username); 
 END$
+DELIMITER ;
+
+
+========================================================================================================================
+
+DELIMITER $
+CREATE TRIGGER update_tokens_after_offer
+AFTER INSERT ON offer
+FOR EACH ROW
+BEGIN
+    DECLARE lowest_price DOUBLE;
+    DECLARE p_id INT;
+    
+    SELECT product_id INTO p_id
+    FROM product
+    WHERE product_name = NEW.product_name;
+    
+    SET lowest_price = (
+        SELECT MIN(price)
+        FROM price_variety
+        WHERE p_id = product_id
+    );
+    
+    IF NEW.price < (lowest_price * 0.8) THEN
+        UPDATE user
+        SET total_tokens = total_tokens + 50
+        WHERE user_username = NEW.user_username;
+    END IF;
+END;
+$
+DELIMITER ;
+
+
+
+===================================================================================================================
+
+SET GLOBAL event_scheduler = ON;
+DELIMITER $
+CREATE EVENT delete_old_offers
+ON SCHEDULE EVERY 1 DAY
+DO
+BEGIN
+    DELETE FROM offer
+    WHERE register_date <= DATE_SUB(NOW(), INTERVAL 7 DAY);
+END;
+$
+DELIMITER ;
+
+
+====================================================================================================================
+
+
+DELIMITER $
+CREATE TRIGGER give_tokens_to_new_user
+BEFORE INSERT ON user
+FOR EACH ROW
+BEGIN
+    SET NEW.total_tokens = 100;
+END;
+$
 DELIMITER ;
 
 
