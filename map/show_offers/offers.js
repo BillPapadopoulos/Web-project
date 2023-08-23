@@ -36,6 +36,12 @@ function displayFrame(category) {
 }
 
 function likeDislike(offerId, action) {
+    const buttonClicked = event.target; //event target references the button (html element) that triggered likeDislike()
+    if (buttonClicked.disabled) {
+        alert('You cannot like or dislike your own offer.');
+        return;
+    }
+
     var xmlhttp = new XMLHttpRequest();
 
     xmlhttp.onreadystatechange = function() {

@@ -1,5 +1,5 @@
 <?php
-
+session_start(); 
 // Mapping English category names to their corresponding Greek names.
 $categoryMapping = [
   'Cleaning' => 'Καθαριότητα',
@@ -21,19 +21,26 @@ if (!isset($_GET['category'])) {
   exit;
 }
 
+$current_username = $_SESSION['user_name'];
+//checks if the username of the session is the username of the offer made
+//query returns the a value is_creator if the user created this offer or not
+//IF(condition, value_if_true, value_if_false) true=> is_creator=1 is_creator=0
 if ($_GET['category'] == 'All Categories') {
-  $query = "SELECT o.*, s.shop_name FROM offer o
-            JOIN shop s ON o.shop_id = s.shop_id";
+  $query = "SELECT o.*, s.shop_name, IF(o.user_username = '$current_username', 1, 0) as is_creator 
+          FROM offer o 
+          JOIN shop s ON o.shop_id = s.shop_id";
+
 } else {
   if (!isset($categoryMapping[$_GET['category']])) {
       echo "Invalid category.";
       exit;
   }
   $greekCategoryName = $categoryMapping[$_GET['category']];
-  $query = "SELECT o.*, s.shop_name FROM offer o 
-            JOIN product p ON o.product_name = p.product_name 
-            JOIN shop s ON o.shop_id = s.shop_id
-            WHERE p.category_name = ?";
+  $query = "SELECT o.*, s.shop_name, IF(o.user_username = '$current_username', 1, 0) as is_creator 
+          FROM offer o 
+          JOIN product p ON o.product_name = p.product_name 
+          JOIN shop s ON o.shop_id = s.shop_id
+          WHERE p.category_name = ?";
 }
 
 $stmt = $connection->prepare($query);
@@ -62,6 +69,11 @@ if ($result->num_rows > 0) {
           </tr>";
           
     while ($row = $result->fetch_assoc()) {
+      if ($row["is_creator"] == 1) {
+        $disableButtons = "disabled";
+    } else {
+        $disableButtons = "";
+    }
         echo "<tr>
                 <td>" . $row["offer_id"] . "</td>
                 <td>" . $row["product_name"] . "</td>
@@ -73,8 +85,8 @@ if ($result->num_rows > 0) {
                 <td>" . $row["register_date"] . "</td>
                 <td>" . $row["availability"] . "</td>
                 <td>
-                  <button class='like-dislike-button' onclick='likeDislike(" . $row["offer_id"] . ", \"like\")'>👍</button>
-                  <button class='like-dislike-button' onclick='likeDislike(" . $row["offer_id"] . ", \"dislike\")'>👎</button>
+                  <button class='like-dislike-button' $disableButtons onclick='likeDislike(" . $row["offer_id"] . ", \"like\")'>👍</button>
+                  <button class='like-dislike-button' $disableButtons onclick='likeDislike(" . $row["offer_id"] . ", \"dislike\")'>👎</button>
                 </td>
               </tr>";
     }
