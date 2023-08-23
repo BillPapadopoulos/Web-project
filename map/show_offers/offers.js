@@ -35,13 +35,32 @@ function displayFrame(category) {
 
 }
 
-function redirectToFilteredMap(category){
-    window.location.href = `/web_database/map/show_offers/filteredmap.php?category=${category}`;
+function likeDislike(offerId, action) {
+    var xmlhttp = new XMLHttpRequest();
+
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            console.log("Server response:", this.responseText);  // Log the server's response
+            var response = JSON.parse(this.responseText);
+            if(response.success) {
+                document.getElementById('like-count-' + offerId).textContent = response.likesCount || 0;
+                document.getElementById('dislike-count-' + offerId).textContent = response.dislikesCount || 0;
+                //console.log(likesCount);
+                console.log(dislikesCount);
+            } else {
+                alert(response.message); // Display the error message received from the server
+            }
+        }
+    };
+
+    xmlhttp.open("POST", "like_dislike_handler.php", true);
+    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xmlhttp.send("offerId=" + offerId + "&action=" + action);
 }
 
 
-  
 
 
-
-
+function redirectToFilteredMap(category){
+    window.location.href = `/web_database/map/show_offers/filteredmap.php?category=${category}`;
+}

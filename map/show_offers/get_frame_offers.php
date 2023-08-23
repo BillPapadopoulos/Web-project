@@ -73,11 +73,9 @@ if ($result->num_rows > 0) {
                 <td>" . $row["register_date"] . "</td>
                 <td>" . $row["availability"] . "</td>
                 <td>
-                <img src='images/like.png' onclick='likeOffer(" . $row["offer_id"] . ")' class='like-dislike-button'>
+                  <button class='like-dislike-button' onclick='likeDislike(" . $row["offer_id"] . ", \"like\")'>👍</button>
+                  <button class='like-dislike-button' onclick='likeDislike(" . $row["offer_id"] . ", \"dislike\")'>👎</button>
                 </td>
-                <td>
-                <img src='images/dislike.png' onclick='dislikeOffer(" . $row["offer_id"] . ")' class='like-dislike-button'>
-            </td>
               </tr>";
     }
     echo "</table>";
@@ -100,5 +98,5 @@ $connection->close();
 </style>
 
 <script>
-  src = "get_frame_offers.js"
+  src = "offers.js"
 </script>

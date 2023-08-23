@@ -4,7 +4,7 @@ $conn = mysqli_connect('localhost','root','', 'web_database');
 ?>
 <!DOCTYPE html>
 <html>
-<title>e-katanalotis offers</title>
+<title>Make a new offer</title>
 
 <head>
     <meta charset="UTF-8">

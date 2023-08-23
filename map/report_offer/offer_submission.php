@@ -8,7 +8,7 @@
 ?>
 <!DOCTYPE html>
 <html>
-  <title>e-katanalotis offers</title>
+  <title>Make a new offer</title>
 <head>
   <meta charset="UTF-8">
   <link rel="stylesheet"

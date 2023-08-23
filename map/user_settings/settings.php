@@ -5,7 +5,7 @@ session_start();
 ?>
 <!DOCTYPE html>
 <html>
-  <title>e-katanalotis offers</title>
+  <title>User Settings</title>
 <head>
   <meta charset="UTF-8">
   <link rel="stylesheet"
@@ -47,7 +47,7 @@ src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js">
       echo "<table>";
       echo "<tr><th>Username: </th><td>" . $row['user_username'] . "</td></tr>"; //username
       echo "<tr><th>Email: </th><td>" . $row['email'] . "</td></tr>"; //email
-      echo "<tr><th>Discounts: </th><td>" . $row['discounts'] . "</td></tr>"; //istoriko prosforwn
+      echo "<tr><th>Offers: </th><td>" . $row['offers'] . "</td></tr>"; //istoriko prosforwn
       echo "<tr><th>Likes: </th><td>" . $row['likes'] . "</td></tr>"; //likes
       echo "<tr><th>Dislikes: </th><td>" . $row['dislikes'] . "</td></tr>"; //dislikes
       echo "<tr><th>Total Score: </th><td>" . $row['total_score'] . "</td></tr>"; //total score

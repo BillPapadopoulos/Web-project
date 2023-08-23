@@ -5,7 +5,7 @@ session_start();
 ?>
 <!DOCTYPE html>
 <html>
-  <title>e-katanalotis offers</title>
+  <title>See and rate offers</title>
 <head>
   <meta charset="UTF-8">
   <link rel="stylesheet"

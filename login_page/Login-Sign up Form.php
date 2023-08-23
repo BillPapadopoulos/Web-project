@@ -77,9 +77,6 @@ include('login.php')
         </div>
          <!-- we add value to the button to be able to check if it is used in js file --> 
         <button class="form__button" type="submit" name="login" value="login">Log in</button>
-        <p class="form__text">
-          <a href="#" class="form__link">Forgot your password?</a>
-        </p>
 
         <p class="form__text">
           <a  class="form__link" href="./" id="linkCreateAccount">Don't have an account? Create one</a>
