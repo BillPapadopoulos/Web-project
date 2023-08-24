@@ -20,7 +20,6 @@ $conn = mysqli_connect('localhost','root','', 'web_database');
     <div class="menu-bar">
         <ul class="Starter Buttons">
             <li><a href="/web_database/map/map.php">Home</a></li>
-            <li><a href="#">Search Offer by Category</a></li>
             <li class="pressed"><a href="report_offer.php">Report an Offer</a></li>
             <li><a href="/web_database/map/show_offers/offers.php">Available Offers</a></li>
             <li><a href="/web_database/map/user_settings/settings.php">User : <?php echo $_SESSION['user_name']; ?>
