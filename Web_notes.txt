@@ -145,35 +145,97 @@ DELIMITER ;
 
 ====================================================================================================================
 -- Trigger to update likes or dislikes AFTER INSERT on the user_like_dislike table
-DELIMITER $$
-CREATE TRIGGER `increment_user_likes_dislikes_after_insert` 
-AFTER INSERT ON `user_like_dislike`
-FOR EACH ROW 
+DELIMITER $
+CREATE TRIGGER update_likes_dislikes
+AFTER INSERT ON user_like_dislike FOR EACH ROW
 BEGIN
-    -- If the action is a like
-    IF NEW.action = 'like' THEN
-        UPDATE `user` SET `likes` = `likes` + 1 WHERE `user_id` = NEW.user_id;
-    ELSE
-        UPDATE `user` SET `dislikes` = `dislikes` + 1 WHERE `user_id` = NEW.user_id;
+    DECLARE offer_action ENUM('like', 'dislike');
+    SET offer_action = NEW.action;
+
+    IF offer_action = 'like' THEN
+        UPDATE user
+        SET likes = likes + 1
+        WHERE user_username = (
+            SELECT user_username
+            FROM offer
+            WHERE offer_id = NEW.offer_id
+        );
+    ELSEIF offer_action = 'dislike' THEN
+        UPDATE user
+        SET dislikes = dislikes + 1
+        WHERE user_username = (
+            SELECT user_username
+            FROM offer
+            WHERE offer_id = NEW.offer_id
+        );
     END IF;
 END;
-$$
+$
+DELIMITER ;
+
+=======================================================================================================================================================
 
 -- Trigger to update likes or dislikes AFTER DELETE on the user_like_dislike table
-DELIMITER $$
-CREATE TRIGGER `decrement_user_likes_dislikes_after_delete` 
-AFTER DELETE ON `user_like_dislike`
-FOR EACH ROW 
+DELIMITER $
+CREATE TRIGGER update_likes_dislikes_after_delete
+AFTER DELETE ON user_like_dislike FOR EACH ROW
 BEGIN
-    -- If the action was a like
-    IF OLD.action = 'like' THEN
-        UPDATE `user` SET `likes` = `likes` - 1 WHERE `user_id` = OLD.user_id;
-    ELSE
-        UPDATE `user` SET `dislikes` = `dislikes` - 1 WHERE `user_id` = OLD.user_id;
+    DECLARE offer_action ENUM('like', 'dislike');
+    SET offer_action = OLD.action;
+
+    IF offer_action = 'like' THEN
+        UPDATE user
+        SET likes = likes - 1
+        WHERE user_username = (
+            SELECT user_username
+            FROM offer
+            WHERE offer_id = OLD.offer_id
+        );
+    ELSEIF offer_action = 'dislike' THEN
+        UPDATE user
+        SET dislikes = dislikes - 1
+        WHERE user_username = (
+            SELECT user_username
+            FROM offer
+            WHERE offer_id = OLD.offer_id
+        );
     END IF;
 END;
-$$
+$
 DELIMITER ;
+
+
+===============================================================================================================
+
+DELIMITER $
+CREATE TRIGGER update_user_offers
+AFTER INSERT ON offer FOR EACH ROW
+BEGIN
+    UPDATE user
+    SET offers = offers + 1
+    WHERE user_username = NEW.user_username;
+END;
+$
+DELIMITER ;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
