@@ -5,7 +5,7 @@ if ($conn->connect_error) {
 }
 
 // Assuming you have a page parameter in the URL like leaderboard.php?page=2
-$page = isset($_GET['page']) ? intval($_GET['page']) : 1; //to page 1 if not set
+$page = isset($_GET['page']) ? intval($_GET['page']) : 1; //default page 1 
 $offset = ($page - 1) * 10; // calculates the starting point for the SQL query based on the current page.
 
 $stmt = $conn->prepare("

@@ -1,22 +1,45 @@
 /* Styles for the leaderboard table */
+.container {
+    width: 100%;  /* This will make the container take the full width of its parent. */
+    box-sizing: border-box;  /* This will include padding and border in the container's total width. */
+    margin-top: 20px;  /* This will move the container 20 pixels downwards. Adjust as needed. */
+    overflow-x: hidden;  /* This will hide any horizontal overflow, effectively removing the horizontal scrollbar. */
+    padding: 0 20px;  /* This provides some space on either side of the content inside the container. */
+    
+}
+
+.container h2 {
+    margin-top: 23px;  /* Adjust as needed to create space above the h2 */
+    margin-bottom: 23px;  /* Adjust as needed to create space below the h2 */
+}
+
 table {
     border-collapse: collapse;
     width: 100%;
     border: 1px solid #ddd;
+    font-size: 0.95em;  /* Adjust font size for better readability */
 }
 
 th, td {
     text-align: left;
-    padding: 8px;
+    padding: 10px; /* Increase padding for better spacing */
+    border-bottom: 1px solid #ddd; /* Add horizontal borders to each cell for better separation */
 }
 
-tr:nth-child(even) {
-    background-color: #f2f2f2;
+tr:last-child td {
+    border-bottom: none; /* Remove border from the last row */
+}
+
+tr:hover {
+    background-color: #f5f5f5; /* Add a hover effect on rows for better interactivity */
 }
 
 th {
     background-color: #4CAF50;
     color: white;
+    position: sticky;   /* Makes the headers sticky */
+    top: 0;             /* Stick to the top of its container */
+    z-index: 2;         /* Ensures it appears above the rows */
 }
 
 /* Pagination styles */

@@ -13,7 +13,11 @@ if ($conn->connect_error) {
 }
 
 // Example query to select top users/entities for the leaderboard (adjust as needed)
-$query = "SELECT user_username as user_name, total_score as user_score FROM user ORDER BY total_score DESC LIMIT $itemsPerPage OFFSET $offset";
+$query = "SELECT user_username as user_name, total_score as user_score, total_tokens, (total_tokens - premonth_tokens) as tokens_this_month 
+FROM user 
+ORDER BY total_score DESC 
+LIMIT $itemsPerPage OFFSET $offset";
+
 
 $result = mysqli_query($conn, $query);
 
@@ -49,14 +53,16 @@ while ($row = mysqli_fetch_assoc($result)) {
 </div>
 
 <div class="container">
+  
   <h2>Leaderboard</h2>
-  <br><br>
   <table>
     <thead>
       <tr>
         <th>Rank</th>
         <th>Username</th>
         <th>Score</th>
+        <th>Monthly Tokens</th>
+        <th>Total Tokens</th>
       </tr>
     </thead>
     <tbody>
@@ -68,6 +74,8 @@ while ($row = mysqli_fetch_assoc($result)) {
         echo "<td>{$rank}</td>";
         echo "<td>{$data['user_name']}</td>";
         echo "<td>{$data['user_score']}</td>";
+        echo "<td>{$data['tokens_this_month']}</td>";  
+        echo "<td>{$data['total_tokens']}</td>";       
         echo "</tr>";
         $rank++;
       }
