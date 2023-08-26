@@ -19,11 +19,6 @@ th {
     color: white;
 }
 
-/* Highlight top 3 rows */
-tbody tr:nth-child(-n+3) {
-    background-color: #FFD700;
-}
-
 /* Pagination styles */
 .pagination {
     display: flex;
