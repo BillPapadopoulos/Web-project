@@ -46,7 +46,7 @@ src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js">
      <li><a href="/web_database/map/admin/update_products.php">Update Products Data </a></li>
      <li><a href="/web_database/map/admin/update_shops.php">Update Shops Data</a></li>
      <li><a href="/web_database/map/admin/statistics/statistics.php">Statistics</a></li>
-     <li><a href=#>LeaderBoard</a></li>
+     <li><a href="/web_database/map/admin/leaderboard/leaderboard.php">Leaderboard</a></li>
      <li><a href="/web_database/map/admin/show_offers/offers.php">Available Offers</a></li>
      <li><a href="/web_database/map/admin/admin_settings/adm_settings.php">Admin : <?php echo $_SESSION['user_name']; ?> <br>Settings</a></li>
     </ul>
