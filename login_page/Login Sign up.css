@@ -159,3 +159,20 @@ border-color:var(var(--color-error));
   text-decoration: underline;
 }
 
+.user-type-selector {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin-top: 20px;
+}
+
+.user-type-button {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  padding: 5px 15px;
+  font-size: 16px;
+  margin: 0 10px;
+}
+

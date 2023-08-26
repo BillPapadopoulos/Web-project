@@ -128,6 +128,32 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     
   });
+
+  ////////////////////////////////ÀÁ¿Ã¸®º· ³¹± ÃÍ³ºÁ¹Ã· ºÉ´¹ºÎ½
+  document.addEventListener("DOMContentLoaded", () => {
+   
+    // •À¹²µ²±¯ÉÃ· Ä¿Å ºÉ´¹º¿Í º±Ä¬ Ä·½ ±ÀÎ»µ¹± Ä¿Å ÆÌº¿Å ±ÀÌ Ä¿ Àµ´¯¿
+    password2.addEventListener("blur", () => {
+      if (password.value !== password2.value) {
+        setMatchingError(password2, "Passwords don't match");
+      }
+    });
+  
+    // š±¸±Á¹Ã¼ÌÂ Ä¿Å ¼·½Í¼±Ä¿Â »¬¸¿ÅÂ ÌÄ±½ ¿ ÇÁ®ÃÄ·Â À»·ºÄÁ¿»¿³µ¯ ÃÄ¿ Àµ´¯¿ ºÉ´¹º¿Í
+    password2.addEventListener("input", () => {
+      clearMatchingError(password2);
+    });
+  
+    // £Ä·½ ÅÀ¿²¿»® Ä·Â ÆÌÁ¼±Â, µ»­³¾Äµ º±¹ À¬»¹ ±½ ¿¹ ºÉ´¹º¿¯ Ä±¹Á¹¬¶¿Å½
+    createAccountForm.addEventListener("submit", (e) => {
+      if (password.value !== password2.value) {
+        e.preventDefault();
+        setMatchingError(password2, "Passwords don't match");
+      }
+      // ‘½ ¿¹ ºÉ´¹º¿¯ Ä±¹Á¹¬¶¿Å½, ÄÌÄµ ¼À¿Áµ¯Äµ ½± ÃÅ½µÇ¯ÃµÄµ ¼µ Ä·½ ÅÀ¿²¿»® Ä·Â ÆÌÁ¼±Â
+    });
+
+  });
   //if the password field is clicked and then the user clicks somewhere else, we print this message. if this check does not exist, we had problems with if hierarchy
   document.querySelectorAll(".form__input").forEach(inputElement => {
     inputElement.addEventListener("blur", e => {
@@ -142,3 +168,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 });
+
+// •À¹»¿³® Ä¿Å ÄÍÀ¿Å µ¹ÃÌ´¿Å (User ® Admin)
+const userTypeButtons = document.querySelectorAll('.user-type-button');
+
+userTypeButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        userTypeButtons.forEach(btn => btn.classList.remove('selected'));
+        button.classList.add('selected');
+
+        // ‘»»±³® Ä·Â Ä¹¼®Â Ä¿Å Àµ´¯¿Å "loginAsAdmin" ±½¬»¿³± ¼µ Ä·½ µÀ¹»¿³® Ä¿Å ÇÁ®ÃÄ·
+        const loginAsAdminInput = document.getElementById('loginAsAdmin');
+        if (button.getAttribute('data-type') === 'admin') {
+            loginAsAdminInput.value = '1';
+        } else {
+            loginAsAdminInput.value = '0';
+        }
+    });
+});
+
+

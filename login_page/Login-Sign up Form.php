@@ -1,3 +1,4 @@
+
 <?php 
 //we include the login php file 
 include('login.php') 
@@ -42,6 +43,38 @@ include('login.php')
     font-size: 14px; /* Ρυθμίζει το μέγεθος του μηνύματος */
     }
 
+    .password-toggle-container {
+     position: relative;
+     
+    }
+
+    .password-toggle { 
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    pointer-events: none;
+    height: 22px;
+    padding: 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+    }
+
+    .form__input-group .password-toggle-container {
+    position: absolute;
+    top: 50%;
+    right: 5px;
+    transform: translateY(-50%);
+    }
+
+    .form__input-group .password-toggle-container button img {
+    height: 18px;
+    width: 18px;
+    }
+
+   
+  
   </style>
 
   </head>
@@ -63,7 +96,8 @@ include('login.php')
             <span><?php echo $name_error; ?></span>
           <?php endif ?>  
         </div>
-        <!-- this is the first form used for the Login page --> 
+
+
         <div class="form__input-group">
           <input type="text" id="loginUsername" class="form__input" autofocus placeholder="Username" name="loginUsername"> 
           <div class="form__input-error-message"></div>
@@ -76,7 +110,9 @@ include('login.php')
           <div class="form__input-error-message"></div>
         </div>
          <!-- we add value to the button to be able to check if it is used in js file --> 
-        <button class="form__button" type="submit" name="login" value="login">Log in</button>
+        
+<input type="hidden" id="loginAsAdmin" name="loginAsAdmin" value="0">
+<button class="form__button" type="submit" name="login" value="login">Log in</button>
 
         <p class="form__text">
           <a  class="form__link" href="./" id="linkCreateAccount">Don't have an account? Create one</a>
@@ -100,9 +136,11 @@ include('login.php')
         </div> 
         <div class="form__input-group">
           <input type="password" required id="signupPassword" class="form__input" autofocus placeholder="Password" name="signupPassword">
-          <button type="button" id="toggleSignupPassword">
-          <img src="/web_database/map/user_settings/hide_pass.png" alt="Toggle Password" />
-          </button>
+          <div class="password-toggle-container">
+            <button type="button" id="toggleSignupPassword" class="password-toggle-container">
+            <img src="/web_database/map/user_settings/hide_pass.png" alt="Toggle Password" />
+            </button>
+        </div>
           <div class="form__input-error-message"></div>
         </div>
         <div class="form__input-group">
@@ -124,7 +162,7 @@ include('login.php')
    </div>
              <!-- import the js file --> 
              <script src="Login Sign up.js"> </script>
-
+            
              <script>
             // Συνάρτηση για toggle εμφάνισης/απόκρυψης του κωδικού
              function togglePasswordVisibility() {
