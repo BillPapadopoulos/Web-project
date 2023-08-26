@@ -32,6 +32,7 @@ session_start();
      <li><a href="/web_database/map/admin/update_shops.php">Update Shops Data</a></li>
      <li  class="pressed"><a href="/web_database/map/admin/statistics/statistics.php">Statistics</a></li>
      <li><a href=#>LeaderBoard</a></li>
+     <li><a href="/web_database/map/admin/show_offers/offers.php">Available Offers</a></li>
      <li><a href="/web_database/map/admin/admin_settings/adm_settings.php">Admin : <?php echo $_SESSION['user_name']; ?> <br>Settings</a></li>
     </ul>
   </div>

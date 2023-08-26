@@ -1,0 +1,103 @@
+<?php
+session_start(); 
+// Mapping English category names to their corresponding Greek names.
+$categoryMapping = [
+  'Cleaning' => 'Καθαριότητα',
+  'Drinks-Refreshments' => 'Ποτά - Αναψυκτικά',
+  'Personal Care' => 'Προσωπική φροντίδα',
+  'Food' => 'Τρόφιμα',
+];
+
+// Establish a connection with the database.
+$connection = mysqli_connect('localhost', 'root', '', 'web_database');
+
+// Check connection.
+if ($connection->connect_error) {
+    die("Connection failed: " . $connection->connect_error);
+}
+
+if (!isset($_GET['category'])) {
+  echo "Invalid category.";
+  exit;
+}
+
+$current_username = $_SESSION['user_name'];
+//checks if the username of the session is the username of the offer made
+//query returns the a value is_creator if the user created this offer or not
+//IF(condition, value_if_true, value_if_false) true=> is_creator=1 is_creator=0
+if ($_GET['category'] == 'All Categories') {
+  $query = "SELECT o.*, s.shop_name, IF(o.user_username = '$current_username', 1, 0) as is_creator 
+          FROM offer o 
+          JOIN shop s ON o.shop_id = s.shop_id";
+
+} else {
+  if (!isset($categoryMapping[$_GET['category']])) {
+      echo "Invalid category.";
+      exit;
+  }
+  $greekCategoryName = $categoryMapping[$_GET['category']];
+  $query = "SELECT o.*, s.shop_name, IF(o.user_username = '$current_username', 1, 0) as is_creator 
+          FROM offer o 
+          JOIN product p ON o.product_name = p.product_name 
+          JOIN shop s ON o.shop_id = s.shop_id
+          WHERE p.category_name = ?";
+}
+
+$stmt = $connection->prepare($query);
+
+if ($_GET['category'] != 'All Categories') {
+  $stmt->bind_param("s", $greekCategoryName);
+}
+
+$stmt->execute();
+
+$result = $stmt->get_result();
+
+// Display the results.
+if ($result->num_rows > 0) {
+    echo "<table>";
+    echo "<tr>
+            <th>Offer ID</th>
+            <th>Product Name</th>
+            <th>Shop Name</th>
+            <th>User</th>
+            <th>Price</th>
+            <th>Likes</th>
+            <th>Dislikes</th>
+            <th>Register Date</th>
+            <th>Availability</th>
+            <th>Delete Offer</th>
+          </tr>";
+          
+    while ($row = $result->fetch_assoc()) {
+      if ($row["is_creator"] == 1) {
+        $disableButtons = "disabled";
+    } else {
+        $disableButtons = "";
+    }
+        echo "<tr>
+                <td>" . $row["offer_id"] . "</td>
+                <td>" . $row["product_name"] . "</td>
+                <td>" . $row["shop_name"] . "</td>
+                <td>" . $row["user_username"] . "</td>
+                <td>" . $row["price"] . "</td>
+                <td id='like-count-" . $row["offer_id"] . "'>" . $row["likes"] . "</td>
+                <td id='dislike-count-" . $row["offer_id"] . "'>" . $row["dislikes"] . "</td>
+                <td>" . $row["register_date"] . "</td>
+                <td>" . $row["availability"] . "</td>
+                <td><button class=\"delete-button\" onclick=\"deleteOffer(" . $row["offer_id"] . ")\">Delete</button></td>
+              </tr>";
+    }
+    echo "</table>";
+} else {
+    echo "No offers available for this category.";
+}
+
+$stmt->close();
+$connection->close();
+
+?>
+
+<script>
+  src = "/web_database/map/admin/show_offers/offers.js"
+</script>
