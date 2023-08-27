@@ -65,7 +65,6 @@ if ($result->num_rows > 0) {
             <th>Likes</th>
             <th>Dislikes</th>
             <th>Register Date</th>
-            <th>Availability</th>
           </tr>";
           
     while ($row = $result->fetch_assoc()) {
@@ -83,7 +82,6 @@ if ($result->num_rows > 0) {
                 <td id='like-count-" . $row["offer_id"] . "'>" . $row["likes"] . "</td>
                 <td id='dislike-count-" . $row["offer_id"] . "'>" . $row["dislikes"] . "</td>
                 <td>" . $row["register_date"] . "</td>
-                <td>" . $row["availability"] . "</td>
                 <td>
                   <button class='like-dislike-button' $disableButtons onclick='likeDislike(" . $row["offer_id"] . ", \"like\")'>👍</button>
                   <button class='like-dislike-button' $disableButtons onclick='likeDislike(" . $row["offer_id"] . ", \"dislike\")'>👎</button>

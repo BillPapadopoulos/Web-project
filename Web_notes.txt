@@ -4,7 +4,10 @@
 
 
 
-5) αλλαγη κωδικα σε ονοματα μεταβλητων στο φορμ
+1) αλλαγη στον κωδικα σε ονοματα μεταβλητων
+2) css για στατιστικα 
+3) Τι γινεται με τα events
+   
 
 ΠΑΡΑΔΟΧΕΣ
 
@@ -13,7 +16,8 @@
 - Τα shops εχουν ολα διαφορετικη ονομασια και οσα εχουν ιδιο ονομα, εχουν αριθμηση για να γινεται το search σωστα
 - Τα subcategory μπηκαν χειροκινητα
 - Η αποσταση για υποβολη προσφορας αντι για 50 μετρα ειναι 1500 μετρα λογω των περιοχων που ζουμε(δεν εχει πολλα supermarket κοντα)
-- Ενας χρηστης παιρνει τοκενς οταν η προσφορα που δημοσιευει εχει 20% μικροτερη τιμη απο τον μεσο ορο των τιμων του προιοντος σε 5 μερες(απο τον πινακα price_variety)
+- Ενας χρηστης παιρνει ποντους οταν η προσφορα που δημοσιευει εχει 20% μικροτερη τιμη απο τον μεσο ορο των τιμων του προιοντος σε 5 μερες(απο τον πινακα price_variety)
+- 
 
 ==========================================================================================================================================================================
 
@@ -58,12 +62,12 @@ DELIMITER ;
 
 DELIMITER $
 
-CREATE TRIGGER likes_add_tokens
+CREATE TRIGGER likes_add_points
 AFTER UPDATE ON OFFER
 FOR EACH ROW 
 BEGIN
 UPDATE USER
-SET total_tokens = total_tokens + 5
+SET total_score = total_score + 5
 WHERE (NEW.likes = OLD.likes + 1 AND USER.user_username = NEW.user_username);
 END$
 
@@ -73,12 +77,12 @@ DELIMITER ;
 ==========================================================================================================================================================================
 
 DELIMITER $
-CREATE TRIGGER dislikes_subtracts_tokens
+CREATE TRIGGER dislikes_subtracts_points
 AFTER UPDATE ON OFFER
 FOR EACH ROW 
 BEGIN
 UPDATE USER
-SET total_tokens = total_tokens - 1
+SET total_score = total_score - 1
 WHERE (NEW.dislikes = OLD.dislikes + 1 AND USER.user_username = NEW.user_username); 
 END$
 DELIMITER ;
@@ -87,7 +91,7 @@ DELIMITER ;
 ========================================================================================================================
 
 DELIMITER $
-CREATE TRIGGER update_tokens_after_offer
+CREATE TRIGGER update_points_after_offer
 AFTER INSERT ON offer
 FOR EACH ROW
 BEGIN
@@ -106,7 +110,7 @@ BEGIN
     
     IF NEW.price < (lowest_price * 0.8) THEN
         UPDATE user
-        SET total_tokens = total_tokens + 50
+        SET total_score = total_score + 50
         WHERE user_username = NEW.user_username;
     END IF;
 END;
@@ -145,7 +149,7 @@ DELIMITER ;
 
 ====================================================================================================================
 -- Trigger to update likes or dislikes AFTER INSERT on the user_like_dislike table
-DELIMITER $$
+DELIMITER $
 CREATE TRIGGER `increment_user_likes_dislikes_after_insert` 
 AFTER INSERT ON `user_like_dislike`
 FOR EACH ROW 
@@ -157,12 +161,12 @@ BEGIN
         UPDATE `user` SET `dislikes` = `dislikes` + 1 WHERE `user_id` = NEW.user_id;
     END IF;
 END;
-$$
+$
 =======================================================================================================================================================
 
 -- Trigger to update likes or dislikes AFTER DELETE on the user_like_dislike table
 
-DELIMITER $$
+DELIMITER $
 CREATE TRIGGER `decrement_user_likes_dislikes_after_delete` 
 AFTER DELETE ON `user_like_dislike`
 FOR EACH ROW 
@@ -174,7 +178,7 @@ BEGIN
         UPDATE `user` SET `dislikes` = `dislikes` - 1 WHERE `user_id` = OLD.user_id;
     END IF;
 END;
-$$
+$
 DELIMITER ;
 
 =======================================================================================================================================================

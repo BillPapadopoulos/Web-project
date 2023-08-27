@@ -65,7 +65,6 @@ if ($result->num_rows > 0) {
             <th>Likes</th>
             <th>Dislikes</th>
             <th>Register Date</th>
-            <th>Availability</th>
             <th>Delete Offer</th>
           </tr>";
           
@@ -84,7 +83,6 @@ if ($result->num_rows > 0) {
                 <td id='like-count-" . $row["offer_id"] . "'>" . $row["likes"] . "</td>
                 <td id='dislike-count-" . $row["offer_id"] . "'>" . $row["dislikes"] . "</td>
                 <td>" . $row["register_date"] . "</td>
-                <td>" . $row["availability"] . "</td>
                 <td><button class=\"delete-button\" onclick=\"deleteOffer(" . $row["offer_id"] . ")\">Delete</button></td>
               </tr>";
     }
