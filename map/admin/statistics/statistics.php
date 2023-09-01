@@ -53,19 +53,24 @@ session_start();
   <div class="centered">
     <h2><b>Average Price Graph</b></h2>
     <div class="form">
-            <div class="select-dropdown">
+        <div class="select-dropdown">
             <select name="category" id="categoryDropdown" onchange="fetchSubcategories(this.value);">
-            <option value="" selected="selected">Choose category</option>
-                </select>
-            </div>
-            <div class="select-dropdown">
+                <option value="" selected="selected">Choose category</option>
+            </select>
+        </div>
+        <div class="select-dropdown">
             <select name="subcategory" id="subcategory" onchange="fetchProducts(this.value);">
-                    <option value="" selected="selected">Choose subcategory</option>
-                </select>
-            </div>
-            <button type="button" onclick="updateOffers()">Update Offers</button>
+                <option value="" selected="selected">Choose subcategory</option>
+            </select>
+        </div>
+        <button type="button" onclick="updateOffers()">Update Offers</button>
     </div>
-  </div>
+</div>
+
+<div id="chart-container_2">
+    <!-- Empty canvas for the second graph will be inserted here dynamically -->
+</div>
+
 
 
     <div id="chart-container_2">
@@ -199,6 +204,77 @@ function fetchPriceStatistics(subcategoryId) {
     xmlhttp.open("GET", `get_avg.php?subcategory_id=${subcategoryId}`, true);
     xmlhttp.send();
 }
+
+// Add this code after the fetchPriceStatistics function
+function createEmptyPriceChart() {
+    const chartContainer = document.getElementById('chart-container_2');
+    const canvas = document.createElement('canvas');
+    canvas.id = 'priceChart';
+    chartContainer.innerHTML = ''; // Clear any existing content
+    chartContainer.appendChild(canvas);
+
+    // Create an empty chart with options similar to the one in fetchPriceStatistics
+    new Chart(canvas, {
+        type: 'line',
+        data: {
+            labels: [],
+            datasets: [{
+                label: 'Average Price',
+                data: [],
+                borderColor: 'rgba(54, 162, 235, 1)',
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                borderWidth: 1,
+                fill: true
+            }]
+        },
+        options: {
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Average Price Statistics',
+                }
+            },
+            scales: {
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Day',
+                    }
+                },
+                y: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: 'Average Price',
+                    }
+                }
+            }
+        }
+    });
+}
+
+
+function updateOffers() {
+    const year = document.getElementById('year').value;
+    const month = document.getElementById('month').value;
+    const subcategoryId = document.getElementById('subcategory').value;
+
+    // Check if both category and subcategory are selected
+    const categoryDropdown = document.getElementById('categoryDropdown');
+    const selectedCategory = categoryDropdown.value;
+
+    if (selectedCategory && subcategoryId) {
+        // Clear the existing chart and create an empty one
+        createEmptyPriceChart();
+
+        // Fetch and populate data for the empty chart
+        fetchPriceStatistics(subcategoryId);
+    } else {
+        alert('Please select a category and a subcategory.');
+    }
+}
+
+
 </script>
 
 <script
@@ -217,14 +293,6 @@ function updateStatistics() {
 }
 </script>
 
-<script>
-function updateOffers() {
-    const year = document.getElementById('year').value;
-    const month = document.getElementById('month').value;
-
-    fetchPriceStatistics(year, month);
-}
-</script>
 
 
 </div>
