@@ -291,6 +291,7 @@ border-color:var(var(--color-error));
   padding: 10px 20px;
   font-size: 16px;
   text-align: center;
+
 }
 
 .file-upload input[type="file"] {
@@ -299,7 +300,7 @@ border-color:var(var(--color-error));
   margin-bottom: 10px;
 }
 
-.file-upload input[type="submit"] {
+.button-style {
   background-color: #3498db;
   color: white;
   border: none;
@@ -307,10 +308,35 @@ border-color:var(var(--color-error));
   font-size: 16px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  text-align: center;
+  margin: 10px auto;
+  display: block;
 }
 
-.file-upload input[type="submit"]:hover {
+.button-style:hover {
   background-color: #2980b9;
+}
+
+
+
+.header{
+  margin-bottom: 20px;
+  margin-top: 5px;
+}
+
+
+.or{
+  margin-bottom: 20px;
+  margin-top: 30px;
+  position:absolute;
+  left: 50%;
+}
+
+.delete-bar{
+  margin-top: 30px;
+  position: absolute;
+  top: 40%;
+  left: 44%;
 }
 
 

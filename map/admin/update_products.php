@@ -28,12 +28,48 @@ $conn = mysqli_connect('localhost', 'root', '', 'web_database');
 
   <div class="file-upload">
   <form action="update_products.php" method="post" enctype="multipart/form-data">
-    <input type="file" name="fileToUpload" id="fileToUpload">
-    <input type="submit" value="Upload File" name="submit">
+    <div class="header">
+      <h2><b>Upload your .json file to insert new products data</b></h2>
+    </div>
+    <input type="file" name="fileToUpload" id="fileToUpload" accept=".json" aria-label="Choose File">
+    <input type="submit" value="Upload File" name="submit" class="button-style">
   </form>
 </div>
 
 
+<div class="or">
+<h2><b>or<b><h2>
+</div>
+
+<div class="delete-bar">
+    <button id="deleteDataButton1" class="button-style">Delete All Product Data</button>
+</div>
+
+
+<script>
+     document.getElementById("deleteDataButton1").addEventListener("click", function() {
+            var result = confirm("Are you sure you want to delete all product data?");
+    });
+
+    function deleteShops(shopId) {
+    if (confirm('Are you sure you want to delete all products?')) { //confirm 
+        fetch(`delete_products_final.php?shop_id=${shopId}`)
+        .then(response => response.text())
+        .then(result => {
+            if (result === 'success') {
+                alert('Products deleted successfully');
+                location.reload(); // reload the page 
+            } else {
+                alert('Failed to delete products. Please try again.');
+            }
+        })
+        .catch(error => {
+            console.error('There was an error deleting products:', error);
+        });
+    }
+}
+
+</script>
 </body>
 </html>
 
@@ -56,50 +92,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($uploadOk == 1) {
         if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $targetFile)) {
             echo '<div class="success-message">The file ' . basename($_FILES["fileToUpload"]["name"]) . ' has been successfully uploaded.</div>';
-            // Εδώ μπορείτε να προχωρήσετε στην εκτέλεση του SQL αρχείου στη βάση δεδομένων
+           
         } else {
             echo '<div class="error-message">Sorry, there was an error uploading your file.</div>';
         }
     }
     
-    /* Ανάλυση του αρχείου Products_final.json
-    $productsJson = file_get_contents($_FILES["fileToUpload"]["tmp_name"]);
-    $productsData = json_decode($productsJson, true);
 
-    // Ανάλυση του αρχείου Prices_final.json
-    $pricesJson = file_get_contents("Prices_final.json");
-    $pricesData = json_decode($pricesJson, true);
-
-    if ($productsData && $pricesData) {
-        // Σύνδεση με τη βάση δεδομένων
-        $conn = mysqli_connect('localhost', 'root', '', 'web_database');
-        
-        foreach ($productsData as $product) {
-            // Ελέγχουμε αν το προϊόν υπάρχει ήδη στη βάση
-            $productId = $product['id'];
-            $productName = $product['name'];
-            $productExistsQuery = "SELECT product_id FROM product WHERE product_id = $productId";
-            // Εκτελούμε το query και ελέγχουμε το αποτέλεσμα
-
-            if ($productExists) {
-                // Ενημέρωση των τιμών για το προϊόν
-                foreach ($pricesData as $priceEntry) {
-                  if ($priceEntry['name'] === $productName) {
-                      $priceDate = $priceEntry['prices'][0]['date']; // Προσαρμόστε τη λογική για το date
-                      $newPrice = $priceEntry['prices'][0]['price']; // Προσαρμόστε τη λογική για την τιμή
-      
-                      $updatePriceQuery = "UPDATE price_variety SET price = $newPrice WHERE product_id = $productId AND price_date = '$priceDate'";
-                      // Εκτελούμε το query για την ενημέρωση της τιμής στη βάση
-                  }
-              }
-            } else {
-                // Προσθήκη του νέου προϊόντος στη βάση
-                // Καθώς και των τιμών από το Prices_final.json
-            }
-        }
-    } else {
-        echo '<div class="error-message">Invalid JSON format for Products or Prices.</div>';
-    }*/
 }
 ?>
 

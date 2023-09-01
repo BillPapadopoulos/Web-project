@@ -52,9 +52,7 @@ src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js">
     </ul>
   </div>
 
-  <div class="delete-bar">
-    <button id="deleteDataButton">Delete All Shop Data</button>
-</div>
+  
 
   <div id="mapid"></div>
   <script>
@@ -64,32 +62,7 @@ src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js">
   <script src="data.js"></script>
   <script src="map.js"></script>
 
-  <script>
-     document.getElementById("deleteDataButton").addEventListener("click", function() {
-            var result = confirm("Are you sure you want to delete all shop data?");
-    });
-
-    document.getElementById("confirmDeleteButton").addEventListener("click", function() {
-        var result = confirm("Are you sure you want to delete all shop data?");
-        if (result) {
-            // Εκτέλεση AJAX για τη διαγραφή δεδομένων
-        var xhr = new XMLHttpRequest();
-        xhr.open("POST", "delete_shops_final.php", true);
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                // Εμφάνιση αποτελέσματος από τον διακομιστή
-                alert(xhr.responseText);
-            }
-        };
-        xhr.send();
-        }
-        document.getElementById("confirmationModal").style.display = "none";
-    });
-
-    document.getElementById("cancelDeleteButton").addEventListener("click", function() {
-        document.getElementById("confirmationModal").style.display = "none";
-    });
-</script>
 
 </body>
 </html>
+

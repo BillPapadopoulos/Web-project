@@ -12,16 +12,8 @@ session_start();
 <head>
   <link rel="stylesheet" href="/web_database/map/admin/adm.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.min.js"></script>
-  <style type="text/css">
-    #chart-container {
-        width: 1280px;
-        height: auto;
-    }
-    #chart-container_2 {
-        width: 1280px;
-        height: auto;
-    }
-</style>
+  <script src="categories.js"></script>
+  <link rel="stylesheet" href="/web_database/map/admin/statistics/statistics.css">
 </head>
 <body>
   <!-- Εδώ ορίζουμε το menu bar της ιστοσελίδας, δηλώνοντας όλα τα πιθανά link - pages στο interface του χρήστη -->
@@ -38,21 +30,50 @@ session_start();
   </div>
 
 
-  <form>
+  
+  <div class="centered">
+  <h2><b>Offer Graph<b></h2>
+  </div>
+  <div class="form1">
     <label for="year">Select Year:</label>
     <input type="number" id="year" name="year" min="2000" max="2099" value="2023">
 
     <label for="month">Select Month:</label>
     <input type="number" id="month" name="month" min="1" max="12" value="8">
 
+    
     <button type="button" onclick="updateStatistics()">Update Statistics</button>
-  </form>
+</div>
 
 
   <div id="chart-container">
   <canvas id="offerChart"></canvas>
   </div>
 
+  <div class="centered">
+    <h2><b>Average Price Graph</b></h2>
+    <div class="form">
+            <div class="select-dropdown">
+            <select name="category" id="categoryDropdown" onchange="fetchSubcategories(this.value);">
+            <option value="" selected="selected">Choose category</option>
+                </select>
+            </div>
+            <div class="select-dropdown">
+            <select name="subcategory" id="subcategory" onchange="fetchProducts(this.value);">
+                    <option value="" selected="selected">Choose subcategory</option>
+                </select>
+            </div>
+            <button type="button" onclick="updateOffers()">Update Offers</button>
+    </div>
+  </div>
+
+
+    <div id="chart-container_2">
+		<canvas id="priceChart"></canvas>
+  </div>
+
+  
+</div>
   <?php //<div id="mapid"></div> ?>
   <script src="map.js"></script> 
 
@@ -90,12 +111,7 @@ function fetchOfferStatistics(year, month) {
                     }]
                 },
                 options: {
-                    plugins: {
-                        title: {
-                            display: true,
-                            text: 'Monthly Offer Statistics'
-                        }
-                    },
+                
                     scales: {
                         x: {
                             title: {
@@ -123,8 +139,66 @@ function fetchOfferStatistics(year, month) {
 
 
 // Call the function with the selected year and month (you need to obtain these values from the user's selection)
-//fetchOfferStatistics(2023, 8);
+fetchOfferStatistics(2023, 7);
+</script>
 
+<script>
+function fetchPriceStatistics(subcategoryId) {
+    const chartContainer = document.getElementById('chart-container_2');
+    const canvas = document.getElementById('priceChart');
+
+    var xmlhttp = new XMLHttpRequest();
+
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            const data = JSON.parse(this.responseText);
+
+            const labels = data.map(entry => entry.day);
+            const averagePrices = data.map(entry => entry.average_price);
+
+            new Chart(canvas, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Average Price',
+                        data: averagePrices,
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                        borderWidth: 1,
+                        fill: true
+                    }]
+                },
+                options: {
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Average Price Statistics'
+                        }
+                    },
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Day'
+                            }
+                        },
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Average Price'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    };
+
+    xmlhttp.open("GET", `get_avg.php?subcategory_id=${subcategoryId}`, true);
+    xmlhttp.send();
+}
 </script>
 
 <script
@@ -132,7 +206,7 @@ function fetchOfferStatistics(year, month) {
   		integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
   		crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-    <script src="./app.js"></script>
+  
 
 <script>
 function updateStatistics() {
@@ -142,6 +216,16 @@ function updateStatistics() {
     fetchOfferStatistics(year, month);
 }
 </script>
+
+<script>
+function updateOffers() {
+    const year = document.getElementById('year').value;
+    const month = document.getElementById('month').value;
+
+    fetchPriceStatistics(year, month);
+}
+</script>
+
 
 </div>
   </body>

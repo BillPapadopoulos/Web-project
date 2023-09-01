@@ -15,6 +15,7 @@ if ($conn->connect_error) {
 // Example query to select top users/entities for the leaderboard (adjust as needed)
 $query = "SELECT user_username as user_name, total_score as user_score, total_tokens, (total_tokens - premonth_tokens) as tokens_this_month 
 FROM user 
+WHERE isAdmin = '0'
 ORDER BY total_score DESC 
 LIMIT $itemsPerPage OFFSET $offset";
 

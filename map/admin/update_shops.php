@@ -28,12 +28,46 @@ $conn = mysqli_connect('localhost', 'root', '', 'web_database');
 
   <div class="file-upload">
   <form action="update_shops.php" method="post" enctype="multipart/form-data">
+    <div class="header">
+      <h2><b>Upload your .json file to insert new shops data<b></h2>
+    </div>
     <input type="file" name="fileToUpload" id="fileToUpload">
-    <input type="submit" value="Upload File" name="submit">
+    <input type="submit" value="Upload File" name="submit" class="button-style">
   </form>
 </div>
 
+<div class="or">
+<h2><b>or<b><h2>
+</div>
 
+<div class="delete-bar">
+    <button id="deleteDataButton" class="button-style">Delete All Shop Data</button>
+</div>
+
+<script>
+     document.getElementById("deleteDataButton").addEventListener("click", function() {
+            var result = confirm("Are you sure you want to delete all shop data?");
+    });
+
+    function deleteShops(shopId) {
+    if (confirm('Are you sure you want to delete all shops?')) { //confirm is alert function with true false response
+        fetch(`delete_shops_final.php?shop_id=${shopId}`)
+        .then(response => response.text())
+        .then(result => {
+            if (result === 'success') {
+                alert('Shops deleted successfully');
+                location.reload(); // reload the page to reflect the change
+            } else {
+                alert('Failed to delete shops. Please try again.');
+            }
+        })
+        .catch(error => {
+            console.error('There was an error deleting shops:', error);
+        });
+    }
+}
+
+</script>
 </body>
 </html>
 
@@ -41,28 +75,29 @@ $conn = mysqli_connect('localhost', 'root', '', 'web_database');
 <?php
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $targetDir = "uploads/"; // Φάκελος στον οποίο θα αποθηκευθούν τα αρχεία
+    $targetDir = "uploads/"; // Store uploaded files
     $targetFile = $targetDir . basename($_FILES["fileToUpload"]["name"]);
     $uploadOk = 1;
     $fileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
 
-    // Ελέγχουμε αν το αρχείο έχει επέκταση .sql
+    // .json expand
     if ($fileType != "json") {
         echo '<div class="error-message">Sorry, only JSON files are allowed.</div>';
         $uploadOk = 0;
     }
     
-    // Εάν όλα είναι εντάξει, ανεβάζουμε το αρχείο
+    // Evrthing ok, upload
     if ($uploadOk == 1) {
         if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $targetFile)) {
             echo '<div class="success-message">The file ' . basename($_FILES["fileToUpload"]["name"]) . ' has been successfully uploaded.</div>';
-            // Εδώ μπορείτε να προχωρήσετε στην εκτέλεση του SQL αρχείου στη βάση δεδομένων
-        } else {
+        }else{
             echo '<div class="error-message">Sorry, there was an error uploading your file.</div>';
         }
     }
     
   
 }
+
+
 ?>
 
