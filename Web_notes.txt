@@ -2,11 +2,9 @@
 
 
 
+2) Τι γινεται με τα events δοκιμαζουμε να βαλουμε και τα δυο
+3) Οταν γινεται διαγραφη προιοντων, ο πινακας price_variety παιρνει πουλι.(λογω cascade στο delete)
 
-
-1) αλλαγη στον κωδικα σε ονοματα μεταβλητων
-2) css για στατιστικα 
-3) Τι γινεται με τα events
    
 
 ΠΑΡΑΔΟΧΕΣ
@@ -195,8 +193,63 @@ $
 DELIMITER ;
 
 
+======================================================================================================================================================
 
 
+DELIMITER $
+
+CREATE PROCEDURE UpdateUserTokens()
+BEGIN
+    DECLARE total_tokens_to_redistribute INT;
+    DECLARE user_count INT;
+    DECLARE user_rank INT;
+    DECLARE user_total_score INT;
+    DECLARE user_tokens_to_receive INT;
+    
+   
+    SET total_tokens_to_redistribute = (SELECT SUM(total_tokens) * 0.8 FROM user);
+    
+    
+    SET user_count = (SELECT COUNT(*) FROM user WHERE total_score > 0);
+    
+   
+    SET user_rank = 0;
+    
+    
+    SET user_total_score = -1; 
+    
+    WHILE user_rank < user_count DO
+       
+        SET user_total_score = (SELECT total_score FROM user WHERE total_score > 0 ORDER BY total_score DESC LIMIT 1 OFFSET user_rank);
+        
+        
+        SET user_tokens_to_receive = ROUND(total_tokens_to_redistribute * (user_total_score / (SELECT SUM(total_score) FROM user WHERE total_score > 0)));
+        
+        
+        UPDATE user
+        SET total_tokens = total_tokens + user_tokens_to_receive
+        WHERE total_score = user_total_score;
+        
+        SET user_rank = user_rank + 1;
+    END WHILE;
+    
+    
+    
+END $
+
+DELIMITER ;
+
+==========================================================================
 
 
+DELIMITER $
+
+CREATE EVENT MonthlyTokenRedistribution
+ON SCHEDULE EVERY 1 MONTH STARTS NOW()
+DO BEGIN
+    CALL UpdateUserTokens();
+   
+END $
+
+DELIMITER ;
 
