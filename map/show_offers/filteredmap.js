@@ -44,7 +44,7 @@ let controlSearch = new L.Control.Search({
 controlSearch.on('search:locationfound', function(e) {
   e.layer.openPopup().openOn(mymap);
 }).on('search:collapsed', function(e) {
-  featuresLayer.resetStyle(e.layer);  // Assuming this line is to reset style after search collapse.
+  featuresLayer.resetStyle(e.layer);  // this line is to reset style after search collapse.
 });
 
 mymap.addControl(controlSearch);

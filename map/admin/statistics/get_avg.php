@@ -2,7 +2,6 @@
 if (isset($_GET['subcategory_id'])) {
     $subcategory_id = $_GET['subcategory_id'];
 
-    // Include your database connection code here
     $conn = mysqli_connect('localhost', 'root', '', 'web_database');
 
     // Fetch the average price data from the database

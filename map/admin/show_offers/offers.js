@@ -31,8 +31,7 @@ function displayFrame(category) {
         xmlhttp.open("GET", "get_frame_offers.php?category=" + category, true);
         xmlhttp.send();
 
-    }, 250); //   the duration of the fade out, should match the CSS transition duration
-
+    }, 250); 
 }
 //function to delete offer... directs to php file 
 function deleteOffer(offerId) {

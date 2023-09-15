@@ -16,7 +16,7 @@ if (isset($_SESSION['user_name'])) {
     exit;
 }
 
-$query = "SELECT user_id FROM user WHERE user_username = ?"; // Assuming your users table is named 'users'
+$query = "SELECT user_id FROM user WHERE user_username = ?";
 $stmt = $connection->prepare($query);
 $stmt->bind_param("s", $username);
 $stmt->execute();
@@ -36,7 +36,7 @@ $stmt->close();
 // Handle the action based on the previous state
 if ($hasPreviousAction) {
     if ($previousAction == $action) {
-        // User clicked the same action again (undoing their action)
+    // User clicked the same action again (undoing their action)
     $query = ($action == 'like') ? "UPDATE offer SET likes = likes - 1 WHERE offer_id = ?" : "UPDATE offer SET dislikes = dislikes - 1 WHERE offer_id = ?";
     $stmt = $connection->prepare($query);
     $stmt->bind_param("i", $offerId);

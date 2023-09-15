@@ -86,7 +86,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $uploadOk = 0;
     }
     
-    // Evrthing ok, upload
+    // Everything ok, upload
     if ($uploadOk == 1) {
         if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $targetFile)) {
             echo '<div class="success-message">The file ' . basename($_FILES["fileToUpload"]["name"]) . ' has been successfully uploaded.</div>';

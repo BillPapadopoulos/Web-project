@@ -7,7 +7,6 @@ if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
-// Disable foreign key checks (use with caution)
 mysqli_query($conn, "SET foreign_key_checks = 0");
 
 // SQL to delete all rows from product table

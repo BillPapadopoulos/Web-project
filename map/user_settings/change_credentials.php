@@ -63,7 +63,6 @@ src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js">
   <script src="map.js"></script> 
 
   <div class="container">
-       <!-- after we include the php file, we add action option with the entire php/html file because we saw that on a video :p--> 
       <form class="form" action="change_credentials_legit.php" onsubmit = "return checkForBlank()" method="POST">
         <!-- this is the form used for the change credentials page --> 
         <div class="form__input-group">
